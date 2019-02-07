@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pla_individualitzat extends Model
+class Atencio_diversitat extends Model
 {
-    protected $table = 'Pla_individualitzat';
+    //
+
+    protected $table = 'atencio_diversitat';
 
 	public function alumne(){
 		
