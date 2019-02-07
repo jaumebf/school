@@ -326,6 +326,11 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
     );
 
     public static $classMap = array (
+        'App\\Alumne' => __DIR__ . '/../..' . '/app/Alumne.php',
+        'App\\Ambit' => __DIR__ . '/../..' . '/app/Ambit.php',
+        'App\\Aspecte_personal' => __DIR__ . '/../..' . '/app/Aspecte_personal.php',
+        'App\\Assignatura' => __DIR__ . '/../..' . '/app/Assignatura.php',
+        'App\\Avaluacio' => __DIR__ . '/../..' . '/app/Avaluacio.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -341,6 +346,8 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mesures_atencio' => __DIR__ . '/../..' . '/app/Mesures_atencio.php',
+        'App\\Pla_individualitzat' => __DIR__ . '/../..' . '/app/Pla_individualitzat.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
