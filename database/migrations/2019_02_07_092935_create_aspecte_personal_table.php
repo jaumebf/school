@@ -17,7 +17,7 @@ class CreateAspectePersonalTable extends Migration
             $table->increments('id');
             $table->integer('alumne_id')->unsigned();
             $table->foreign('alumne_id')->references('id')->on('alumnes')->onDelete('cascade');
-            $table->int('motivacio');
+            $table->integer('motivacio');
             $table->integer('concentracio');
             $table->integer('agenda');
             $table->integer('relacio');

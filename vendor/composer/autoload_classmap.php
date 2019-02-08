@@ -10,6 +10,7 @@ return array(
     'App\\Ambit' => $baseDir . '/app/Ambit.php',
     'App\\Aspecte_personal' => $baseDir . '/app/Aspecte_personal.php',
     'App\\Assignatura' => $baseDir . '/app/Assignatura.php',
+    'App\\Atencio_diversitat' => $baseDir . '/app/Atencio_diversitat.php',
     'App\\Avaluacio' => $baseDir . '/app/Avaluacio.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',

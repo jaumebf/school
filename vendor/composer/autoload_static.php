@@ -330,6 +330,7 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'App\\Ambit' => __DIR__ . '/../..' . '/app/Ambit.php',
         'App\\Aspecte_personal' => __DIR__ . '/../..' . '/app/Aspecte_personal.php',
         'App\\Assignatura' => __DIR__ . '/../..' . '/app/Assignatura.php',
+        'App\\Atencio_diversitat' => __DIR__ . '/../..' . '/app/Atencio_diversitat.php',
         'App\\Avaluacio' => __DIR__ . '/../..' . '/app/Avaluacio.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
