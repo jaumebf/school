@@ -49,12 +49,7 @@
                                 <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
                             </li>
                         <?php else: ?>
-                        <li class="nav-item dropdown"><a href="<?php echo e(url('/alumnes')); ?>"><h3>Alumnes &nbsp;</h3></a></li>
-                        <li class="nav-item dropdown"> <a href="<?php echo e(url('/professors')); ?>"><h3>Professors &nbsp; </h3></a></li>
-                        <li class="nav-item dropdown"><a href="<?php echo e(url('/operacions')); ?>"><h3>Operacions &nbsp;</h3></a></li>
-                           
-                            
-                                
+                                                          
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
