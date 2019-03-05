@@ -326,6 +326,8 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
     );
 
     public static $classMap = array (
+        'AlumnesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AlumnesTableSeeder.php',
+        'AmbitTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AmbitTableSeeder.php',
         'App\\Alumne' => __DIR__ . '/../..' . '/app/Alumne.php',
         'App\\Ambit' => __DIR__ . '/../..' . '/app/Ambit.php',
         'App\\Aspecte_personal' => __DIR__ . '/../..' . '/app/Aspecte_personal.php',
@@ -355,6 +357,9 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'AspectePersonalTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AspectePersonalTableSeeder.php',
+        'AssignaturaTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AssignaturaTableSeeder.php',
+        'AtencioDiversitatTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AtencioDiversitatTableSeeder.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
@@ -2017,6 +2022,7 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'NunoMaduro\\Collision\\Highlighter' => __DIR__ . '/..' . '/nunomaduro/collision/src/Highlighter.php',
         'NunoMaduro\\Collision\\Provider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Provider.php',
         'NunoMaduro\\Collision\\Writer' => __DIR__ . '/..' . '/nunomaduro/collision/src/Writer.php',
+        'ObservFaltesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ObservFaltesTableSeeder.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -2668,6 +2674,7 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'PhpParser\\Parser\\Tokens' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Parser/Tokens.php',
         'PhpParser\\PrettyPrinterAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinterAbstract.php',
         'PhpParser\\PrettyPrinter\\Standard' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php',
+        'PlaIndividualitzatTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PlaIndividualitzatTableSeeder.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
         'Prophecy\\Argument\\Token\\AnyValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',
