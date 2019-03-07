@@ -18,3 +18,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+//Alumnes contolers
+Route::get('/alumnes/llistat/','Alumnes@llistar');
+Route::get('/alumnes/esborrar/{codi}','Alumnes@esborrar')->where('codi', '[0-9]+');
+Route::get('/alumnes/actualitzar/{codi}','Alumnes@actualitzar')->where('codi', '[0-9]+');
+Route::post('alumnes/actualitzar/','Alumnes@modificar');
+
+
