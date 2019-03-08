@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<li class="nav-item dropdown"><a href="{{ url('/alumnes') }}"><h3>Alumnes &nbsp;</h3></a></li>
-<li class="nav-item dropdown"> <a href="{{ url('/professors') }}"><h3>Professors &nbsp; </h3></a></li>
-<li class="nav-item dropdown"><a href="{{ url('/operacions') }}"><h3>Operacions &nbsp;</h3></a></li>
+<li class="nav-item dropdown"><a href="{{ url('/alumnes/llistat') }}"><h3>Alumnes &nbsp;</h3></a></li>
+<li class="nav-item dropdown"><a href="{{ url('/professors/llistat') }}"><h3>Professors &nbsp; </h3></a></li>
 
 <div class="container">
     <div class="row justify-content-center">

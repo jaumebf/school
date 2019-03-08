@@ -17,7 +17,7 @@ class AlumnesTableSeeder extends Seeder
                     "surname" => "cognom$i",
                     "dni" => "dni$i",
                     "dob" => '2000-01-01',
-                    "course" => rand(1, 50),
+                    "course" => rand(1, 6),
         ]);
         }
     }
