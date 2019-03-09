@@ -10,7 +10,7 @@ class Alumnes extends Controller
     //LLISTAR
     public function llistat(){
         //$llistat = \App\Product::all(); TOTS
-        $llistat = Alumne::paginate(15);
+        $llistat = Alumne::paginate(12);
         return view('alumnes.llistat')->with('alumnes',$llistat);
               
     }
@@ -20,7 +20,7 @@ class Alumnes extends Controller
         $alumne = Alumne::findOrFail($id);
         $alumne->delete();
         
-        return redirect('alumnes/llistat')->with('status','Producte esborrat correctament');
+        return redirect('alumnes/llistat')->with('message','Alumne esborrat correctament');
     }
     
     //ACTUALITZAR VEURE
@@ -34,7 +34,7 @@ class Alumnes extends Controller
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:0',
+            'curs' => 'required|numeric|min:1|max:8',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
             ]); 
@@ -46,7 +46,7 @@ class Alumnes extends Controller
         $alumne->course = $request->curs;
         $alumne->dob = $request->dob;
         $alumne->save();        
-        return redirect('alumnes/llistat');
+        return redirect('alumnes/llistat')->with('message','Alumne modificat correctament');
     }
     
  
@@ -61,7 +61,7 @@ class Alumnes extends Controller
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:0',
+            'curs' => 'required|numeric|min:1|max:8',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
             ]); 
@@ -73,7 +73,7 @@ class Alumnes extends Controller
         $alumne->course = $request->curs;
         $alumne->dob = $request->dob;
         $alumne->save();        
-        return redirect('alumnes/llistat');
+        return redirect('alumnes/llistat')->with('message','Alumne afegit correctament');
     }  
     
     

@@ -1,44 +1,68 @@
-<h1>Afegir alumne</h1>
-<form method="POST" action="{{url('alumnes/afegir')}}">
-    @csrf
-    
-    <div class="form-group">
-        <label for="nom">Nom</label>
-        <input type="text" name="nom" value="{{old('nom')}}">
+@extends('layouts.app')
+
+@section('content')
+<ul class="nav justify-content-center"> 
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url("alumnes/llistat") }}">Llistar alumnes</a>
+    </li>
+</ul>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <br>
+        <h1 align='center'>Afegir alumne</h1>
+        <br>
     </div>
-    
-    <div class="form-group">
-        <label for="cognom">Cognom</label>
-        <input type="text" name="cognom" value="{{old('cognom')}}">
+
+    <div class="col-md-10">
+        <form method="POST" action="{{url('alumnes/afegir')}}">
+            @csrf
+
+            <div class="form-group {{ $errors->has('nom') ? 'is-invalid' : '' }}" name="nom">
+                <label for="nom" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>               
+                <input type="text" name="nom" value="{{old('nom')}}" class="form-control">                 
+                @if($errors->has('nom'))                  
+                <strong>{{ $errors->first('nom') }}</strong>                  
+                @endif    
+            </div>
+
+            <div class="form-group {{ $errors->has('cognom') ? 'is-invalid' : '' }}" name="cognom">
+                <label for="cognom" class="col-sm-2 col-form-label col-form-label-sm">Cognom</label>               
+                <input type="text" name="cognom" value="{{old('cognom')}}" class="form-control">                 
+                @if($errors->has('cognom'))                  
+                <strong>{{ $errors->first('cognom') }}</strong>                  
+                @endif    
+            </div>
+
+            <div class="form-group {{ $errors->has('dni') ? 'is-invalid' : '' }}" name="dni">
+                <label for="dni" class="col-sm-2 col-form-label col-form-label-sm">DNI</label>               
+                <input type="text" name="dni" value="{{old('dni')}}" class="form-control">                 
+                @if($errors->has('dni'))                  
+                <strong>{{ $errors->first('dni') }}</strong>                  
+                @endif    
+            </div>
+
+            <div class="form-group {{ $errors->has('curs') ? 'is-invalid' : '' }}" name="curs">
+                <label for="curs" class="col-sm-2 col-form-label col-form-label-sm">Curs</label>               
+                <input type="number" name="curs" value="{{old('curs')}}" class="form-control">                 
+                @if($errors->has('cognom'))                  
+                <strong>{{ $errors->first('curs') }}</strong>                  
+                @endif    
+            </div>
+
+            <div class="form-group {{ $errors->has('dob') ? 'is-invalid' : '' }}" name="dob">
+                <label for="dob" class="col-sm-2 col-form-label col-form-label-sm">Data de naixement</label>               
+                <input type="date" name="dob" value="{{old('dob')}}" class="form-control">                 
+                @if($errors->has('dob'))                  
+                <strong>{{ $errors->first('dob') }}</strong>                  
+                @endif    
+            </div>
+            
+            <br>
+            <button type="submit" class="btn btn-primary">Afegir alumne</button>
+            </fieldset>
+        </form>
     </div>
-    
-    <div class="form-group">
-        <label for="dni">DNI</label>
-        <input type="text" name="dni" value="{{old('dni')}}">
-    </div>
-    <br>
-        
-    <div class="form-group">
-        <label for="curs">Curs</label>
-        <input type="text" name="curs" value="{{old('curs')}}">
-    </div>
-    <br>
-    
-    <div class="form-group">
-        <label for="dob">Data de naixement</label>
-        <input type="date" name="dob" value="{{old('dob')}}">
-    </div>
-    
-    <br>
-    
-    <input type="submit" value="Afegir alumne">        
-</form>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+</div>
+@endsection
+
