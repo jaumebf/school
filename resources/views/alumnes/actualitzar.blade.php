@@ -1,44 +1,56 @@
-<h1>Actualitzar Alumne</h1>
-<form method="POST" action="{{url('alumnes/actualitzar')}}">
-    @csrf
-    <input type="hidden" name="id" value="{{$alumne->id}}"
-    <div class="form-group">
-        <label for="nom">Nom</label>
-        <input type="text" name="nom" value="{{$alumne->name}}">
-    </div>
+@extends('layouts.app')
+@section('content')
+<ul class="nav justify-content-center"> 
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url("alumnes/llistat") }}">Llistar alumnes</a>
+    </li>
     
-    <div class="form-group">
-        <label for="cognom">Cognom</label>
-        <input type="text" name="cognom" value="{{$alumne->surname}}">
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
+    </li>
+</ul>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <br>
+        <h1 align='center'>Actualitzar alumne</h1>
+        <br>
     </div>
+
+    <div class="col-md-10">
+    <form method="POST" action="{{url('alumnes/actualitzar')}}">
+    @csrf            
+            <input type="hidden" name="id" value="{{$alumne->id}}">
     
-    <div class="form-group">
-        <label for="dni">DNI</label>
-        <input type="text" name="dni" value="{{$alumne->dni}}">
+            <div class="form-group" name="nom">
+                <label for="nom" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>               
+                <input type="text" name="nom" value="{{$alumne->name}}" class="form-control">               
+            </div>
+
+            <div class="form-group" name="cognom">
+                <label for="cognom" class="col-sm-2 col-form-label col-form-label-sm">Cognom</label>               
+                <input type="text" name="cognom" value="{{$alumne->surname}}" class="form-control">                 
+            </div>
+
+            <div class="form-group" name="dni">
+                <label for="dni" class="col-sm-2 col-form-label col-form-label-sm">DNI</label>               
+                <input type="text" name="dni" value="{{$alumne->dni}}" class="form-control">               
+            </div>
+
+            <div class="form-group" name="curs">
+                <label for="curs" class="col-sm-2 col-form-label col-form-label-sm">Curs</label>               
+                <input type="number" name="curs" value="{{$alumne->course}}" class="form-control">                 
+            </div>
+
+            <div class="form-group" name="dob">
+                <label for="dob" class="col-sm-2 col-form-label col-form-label-sm">Data de naixement</label>               
+                <input type="date" name="dob" value="{{$alumne->dob}}" class="form-control">                
+            </div>
+            
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar alumne</button>
+            </fieldset>
+        </form>
     </div>
-    <br>
-        
-    <div class="form-group">
-        <label for="curs">Curs</label>
-        <input type="text" name="curs" value="{{$alumne->course}}">
-    </div>
-    <br>
-    
-    <div class="form-group">
-        <label for="dob">Data de naixement</label>
-        <input type="date" name="dob" value="{{$alumne->dob}}">
-    </div>
-    
-    <br>
-    
-    <input type="submit" value="Guardar alumne">        
-</form>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+</div>
+@endsection
