@@ -7,6 +7,11 @@ use App\Alumne;
 
 class Alumnes extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //LLISTAR
     public function llistat(){
         //$llistat = \App\Product::all(); TOTS
