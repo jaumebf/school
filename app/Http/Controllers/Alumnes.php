@@ -15,7 +15,7 @@ class Alumnes extends Controller
     //LLISTAR
     public function llistat(){
         //$llistat = \App\Product::all(); TOTS
-        $llistat = Alumne::paginate(12);
+        $llistat = Alumne::orderBy('course')->paginate(12);
         return view('alumnes.llistat')->with('alumnes',$llistat);
               
     }
