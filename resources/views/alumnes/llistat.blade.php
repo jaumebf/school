@@ -22,18 +22,16 @@
 
         <table class="table table-striped">
             <tr>
-                <th>CODI</th>
                 <th>NOM</th>
                 <th>COGNOM</th>
                 <th>DNI</th>
                 <th>COURSE</th>
                 <th>Date of Birthday</th>
-                <th colspan="2">Accions</th>
+                <th colspan="3">Accions</th>
             </tr>
 
             @foreach($alumnes as $alumne)
             <tr>
-                <td>{{$alumne->id}}</td>
                 <td>{{$alumne->name}}</td>
                 <td>{{$alumne->surname}}</td>
                 <td>{{$alumne->dni}}</td>        
@@ -41,6 +39,7 @@
                 <td>{{$alumne->dob}}</td>        
                 <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
                 <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
+                <td><a href="{{url("alumnes/plaindividualitzat",$alumne->id)}}">Pla individualitzat</a></td>
             </tr>
             @endforeach
         </table>

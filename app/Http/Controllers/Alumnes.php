@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pla_individualitzat;
 use App\Alumne;
 
 class Alumnes extends Controller
@@ -16,8 +17,7 @@ class Alumnes extends Controller
     public function llistat(){
         //$llistat = \App\Product::all(); TOTS
         $llistat = Alumne::orderBy('course')->paginate(12);
-        return view('alumnes.llistat')->with('alumnes',$llistat);
-              
+        return view('alumnes.llistat')->with('alumnes',$llistat);              
     }
     
     //ESBORRAR
@@ -77,8 +77,8 @@ class Alumnes extends Controller
         $alumne->dni = $request->dni;
         $alumne->course = $request->curs;
         $alumne->dob = $request->dob;
-        $alumne->save();        
-        return redirect('alumnes/llistat')->with('message','Alumne afegit correctament');
+        $alumne->save();
+        return redirect('/plaindividualitzat/afegir/'.$alumne->id);
     }  
     
     

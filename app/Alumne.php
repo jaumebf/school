@@ -17,5 +17,10 @@ class Alumne extends Model
 		
 		return $this->hasOne('\App\Aspecte_personal', 'id');
 	}   
+        
+	public function pla_individualitzat(){
+		
+		return $this->hasOne('\App\Pla_individualitzat', 'id');
+	}   
     
 }

@@ -27,4 +27,9 @@ Route::get('/alumnes/esborrar/{codi}','Alumnes@esborrar')->where('codi', '[0-9]+
 Route::get('/alumnes/actualitzar/{codi}','Alumnes@actualitzar')->where('codi', '[0-9]+');
 Route::post('alumnes/actualitzar/','Alumnes@modificar');
 
+//Pla Individualtzat
+Route::get('/alumnes/plaindividualitzat/{codi}','PlaIndividualitzat@actualitzar')->where('codi', '[0-9]+');
+Route::get('/plaindividualitzat/afegir/{codi}','PlaIndividualitzat@afegir')->where('codi', '[0-9]+');
+
+
 

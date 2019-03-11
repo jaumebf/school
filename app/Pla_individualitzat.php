@@ -8,8 +8,7 @@ class Pla_individualitzat extends Model
 {
     protected $table = 'Pla_individualitzat';
 
-	public function alumne(){
-		
-		return $this->hasOne('\App\Alumne', 'alumne_id');
-	}   
+    public function alumne(){		
+        return $this->hasOne('\App\Alumne', 'alumne_id');
+    }   
 }
