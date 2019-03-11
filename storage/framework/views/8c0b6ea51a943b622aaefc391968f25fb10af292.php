@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Escola')); ?></title>
+    <title>Escola</title>
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
@@ -25,8 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <?php echo e(config('app.name', 'Escola')); ?>
-
+                   Escola
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
@@ -34,10 +33,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -49,14 +45,44 @@
                                 <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
                             </li>
                         <?php else: ?>
-                                                          
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/alumnes/llistat')); ?>" class="nav-link">Alumnes</a>
+                        </li>
+                        
+                         <li class="nav-item"></li>
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/professors/llistat')); ?>" class="nav-link">Ambit</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/alumnes/llistat')); ?>" class="nav-link">Assignatura</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/professors/llistat')); ?>" class="nav-link">Aspectes personals</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/alumnes/llistat')); ?>" class="nav-link">Atenció a la diversitat</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="<?php echo e(url('/professors/llistat')); ?>" class="nav-link">Observacions i faltes</a>
+                        </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                                 </a>
-                                                                
-
+                                                                                             
+                                                               
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="">
+                                     Configuració
+                                    </a>
+                                    
                                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

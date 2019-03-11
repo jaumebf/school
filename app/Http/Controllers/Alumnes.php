@@ -51,7 +51,7 @@ class Alumnes extends Controller
         $alumne->course = $request->curs;
         $alumne->dob = $request->dob;
         $alumne->save();        
-        return redirect('alumnes/llistat')->with('message','Alumne modificat correctament');
+        return redirect('alumnes/llistat')->with('message','Alumne actualitzat correctament');
     }
     
  

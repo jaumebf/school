@@ -24,27 +24,42 @@
     
             <div class="form-group" name="nom">
                 <label for="nom" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>               
-                <input type="text" name="nom" value="{{$alumne->name}}" class="form-control">               
+                <input type="text" name="nom" value="{{$alumne->name}}" class="form-control">
+                @if($errors->has('nom'))                  
+                <strong>{{ $errors->first('nom') }}</strong>                  
+                @endif    
             </div>
 
             <div class="form-group" name="cognom">
                 <label for="cognom" class="col-sm-2 col-form-label col-form-label-sm">Cognom</label>               
-                <input type="text" name="cognom" value="{{$alumne->surname}}" class="form-control">                 
+                <input type="text" name="cognom" value="{{$alumne->surname}}" class="form-control">
+                @if($errors->has('cognom'))                  
+                <strong>{{ $errors->first('cognom') }}</strong>                  
+                @endif    
             </div>
 
             <div class="form-group" name="dni">
                 <label for="dni" class="col-sm-2 col-form-label col-form-label-sm">DNI</label>               
-                <input type="text" name="dni" value="{{$alumne->dni}}" class="form-control">               
+                <input type="text" name="dni" value="{{$alumne->dni}}" class="form-control">
+                @if($errors->has('dni'))                  
+                <strong>{{ $errors->first('dni') }}</strong>                  
+                @endif    
             </div>
 
             <div class="form-group" name="curs">
                 <label for="curs" class="col-sm-2 col-form-label col-form-label-sm">Curs</label>               
-                <input type="number" name="curs" value="{{$alumne->course}}" class="form-control">                 
+                <input type="number" name="curs" value="{{$alumne->course}}" class="form-control">
+                @if($errors->has('cognom'))                  
+                <strong>{{ $errors->first('curs') }}</strong>                  
+                @endif   
             </div>
 
             <div class="form-group" name="dob">
                 <label for="dob" class="col-sm-2 col-form-label col-form-label-sm">Data de naixement</label>               
-                <input type="date" name="dob" value="{{$alumne->dob}}" class="form-control">                
+                <input type="date" name="dob" value="{{$alumne->dob}}" class="form-control">
+                @if($errors->has('dob'))                  
+                <strong>{{ $errors->first('dob') }}</strong>                  
+                @endif                 
             </div>
             
             <br>
