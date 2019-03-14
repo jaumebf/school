@@ -11,10 +11,6 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -29,7 +25,9 @@ Route::post('alumnes/actualitzar/','Alumnes@modificar');
 
 //Pla Individualtzat
 Route::get('/alumnes/plaindividualitzat/{codi}','PlaIndividualitzat@actualitzar')->where('codi', '[0-9]+');
+Route::post('/alumnes/plaindividualitzat/','PlaIndividualitzat@modificar');
 Route::get('/plaindividualitzat/afegir/{codi}','PlaIndividualitzat@afegir')->where('codi', '[0-9]+');
+
 
 
 

@@ -21,22 +21,25 @@ class PlaIndividualitzat extends Controller
     
     //MODIFICAR
     public function modificar(Request $request){
-        $request->validate([
-            'nom' => 'required|max:100',
-            'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:1|max:8',
-            'dni' => 'required|min:1|max:9',
-            'dob' => 'required|date|date_format:Y-m-d',
-            ]); 
+                
+        $pla = Pla_individualitzat::findOrFail($request->id);
         
-        $alumne = Alumne::findOrFail($request->id);
-        $alumne->name = $request->nom;
-        $alumne->surname = $request->cognom;
-        $alumne->dni = $request->dni;
-        $alumne->course = $request->curs;
-        $alumne->dob = $request->dob;
-        $alumne->save();        
-        return redirect('alumnes/llistat')->with('message','Alumne actualitzat correctament');
+        echo $request->input('llengua');
+        die();
+        
+        ($request->llengua) ? $pla->llengua = 1 : $pla->llengua = 0;
+        ($request->llengua_castellana) ? $pla->llengua_castellana = 1 : $pla->llengua_castellana = 0;
+        ($request->input('llengua_inglesa')) ? $pla->llengua_inglesa = 1 : $pla->llengua_inglesa = 0;
+        ($request->has('matematiques')) ? $pla->matematiques = 1 : $pla->matematiques = 0;
+        ($request->has('cm_natural')) ? $pla->cm_natural = 1 : $pla->cm_natural = 0;
+        ($request->has('cm_social')) ? $pla->cm_social = 1 : $pla->cm_social = 0;
+        ($request->has('ed_artistica')) ? $pla->ed_artistica = 1 : $pla->ed_artistica = 0;
+        ($request->has('ed_fisica')) ? $pla->ed_fisica = 1 : $pla->ed_fisica = 0;
+        ($request->has('religio')) ? $pla->religio = 1 : $pla->religio = 0;
+        ($request->has('valors')) ? $pla->valors = 1 : $pla->valors = 0;
+        $pla->save();
+        
+        return redirect('alumnes/llistat')->with('message','Pla actualitzat correctament');
     }
     
     public function afegir($id){       
@@ -55,6 +58,6 @@ class PlaIndividualitzat extends Controller
         $pla->religio = 0;
         $pla->valors = 0;       
         $pla->save();
-        return redirect('alumnes/llistat')->with('message','Alumne afegit correctament');
+        return redirect('alumnes/llistat')->with('message','Pla afegit correctament');
     }
 }
