@@ -24,19 +24,16 @@ class PlaIndividualitzat extends Controller
                 
         $pla = Pla_individualitzat::findOrFail($request->id);
         
-        echo $request->input('llengua');
-        die();
-        
-        ($request->llengua) ? $pla->llengua = 1 : $pla->llengua = 0;
-        ($request->llengua_castellana) ? $pla->llengua_castellana = 1 : $pla->llengua_castellana = 0;
+        ($request->input('llengua')) ? $pla->llengua = 1 : $pla->llengua = 0;
+        ($request->input('llengua_castellana')) ? $pla->llengua_castellana = 1 : $pla->llengua_castellana = 0;
         ($request->input('llengua_inglesa')) ? $pla->llengua_inglesa = 1 : $pla->llengua_inglesa = 0;
-        ($request->has('matematiques')) ? $pla->matematiques = 1 : $pla->matematiques = 0;
-        ($request->has('cm_natural')) ? $pla->cm_natural = 1 : $pla->cm_natural = 0;
-        ($request->has('cm_social')) ? $pla->cm_social = 1 : $pla->cm_social = 0;
-        ($request->has('ed_artistica')) ? $pla->ed_artistica = 1 : $pla->ed_artistica = 0;
-        ($request->has('ed_fisica')) ? $pla->ed_fisica = 1 : $pla->ed_fisica = 0;
-        ($request->has('religio')) ? $pla->religio = 1 : $pla->religio = 0;
-        ($request->has('valors')) ? $pla->valors = 1 : $pla->valors = 0;
+        ($request->input('matematiques')) ? $pla->matematiques = 1 : $pla->matematiques = 0;
+        ($request->input('cm_natural')) ? $pla->cm_natural = 1 : $pla->cm_natural = 0;
+        ($request->input('cm_social')) ? $pla->cm_social = 1 : $pla->cm_social = 0;
+        ($request->input('ed_artistica')) ? $pla->ed_artistica = 1 : $pla->ed_artistica = 0;
+        ($request->input('ed_fisica')) ? $pla->ed_fisica = 1 : $pla->ed_fisica = 0;
+        ($request->input('religio')) ? $pla->religio = 1 : $pla->religio = 0;
+        ($request->input('valors')) ? $pla->valors = 1 : $pla->valors = 0;
         $pla->save();
         
         return redirect('alumnes/llistat')->with('message','Pla actualitzat correctament');

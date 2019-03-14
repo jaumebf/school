@@ -27,63 +27,63 @@
             </div>
                
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="llengua_castellana" type="checkbox" value="" @if($pla && $pla->llengua_castellana == 1) checked @endif>
+                <input class="form-check-input" name="llengua_castellana" type="checkbox" value="1" @if($pla && $pla->llengua_castellana == 1) checked @endif>
                 <label class="form-check-label" for="llengua_castellana">
                   Llengua castellana
                 </label>                                        
             </div>
             
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="llengua_inglesa" type="checkbox" value="" @if($pla && $pla->llengua_inglesa == 1) checked @endif>
+                <input class="form-check-input" name="llengua_inglesa" type="checkbox" value="1" @if($pla && $pla->llengua_inglesa == 1) checked @endif>
                 <label class="form-check-label" for="llengua_inglesa">
                   Llengua inglesa
                 </label>                                        
             </div>
                
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="matematiques" type="checkbox" value="" @if($pla && $pla->matematiques == 1) checked @endif>
+                <input class="form-check-input" name="matematiques" type="checkbox" value="1" @if($pla && $pla->matematiques == 1) checked @endif>
                 <label class="form-check-label" for="matematiques">
                   Matematiques
                 </label>                                        
             </div>
                             
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="cm_natural" type="checkbox" value="" @if($pla && $pla->cm_natural == 1) checked @endif>
+                <input class="form-check-input" name="cm_natural" type="checkbox" value="1" @if($pla && $pla->cm_natural == 1) checked @endif>
                 <label class="form-check-label" for="cm_natural">
                   CM Natural
                 </label>                                        
             </div>
                
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="cm_social" type="checkbox" value="" @if($pla && $pla->cm_social == 1) checked @endif>
+                <input class="form-check-input" name="cm_social" type="checkbox" value="1" @if($pla && $pla->cm_social == 1) checked @endif>
                 <label class="form-check-label" for="cm_social">
                   CM social
                 </label>                                        
             </div>
             
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="ed_artistica" type="checkbox" value="" @if($pla && $pla->ed_artistica == 1) checked @endif>
+                <input class="form-check-input" name="ed_artistica" type="checkbox" value="1" @if($pla && $pla->ed_artistica == 1) checked @endif>
                 <label class="form-check-label" for="ed_artistica">
                   Ed. Artistica
                 </label>                                        
             </div>
                
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="ed_fisica" type="checkbox" value="" @if($pla && $pla->ed_fisica == 1) checked @endif>
+                <input class="form-check-input" name="ed_fisica" type="checkbox" value="1" @if($pla && $pla->ed_fisica == 1) checked @endif>
                 <label class="form-check-label" for="ed_fisica">
                   Ed. Física
                 </label>                                        
             </div>
             
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="religio" type="checkbox" value="" @if($pla && $pla->religio == 1) checked @endif>
+                <input class="form-check-input" name="religio" type="checkbox" value="1" @if($pla && $pla->religio == 1) checked @endif>
                 <label class="form-check-label" for="religio">
                   Religio
                 </label>                                        
             </div>
                
             <div class="form-check form-check-inline">
-                <input class="form-check-input" name="valors" type="checkbox" value="" @if($pla && $pla->valors == 1) checked @endif>
+                <input class="form-check-input" name="valors" type="checkbox" value="1" @if($pla && $pla->valors == 1) checked @endif>
                 <label class="form-check-label" for="valors">
                   Valors
                 </label>                                        
