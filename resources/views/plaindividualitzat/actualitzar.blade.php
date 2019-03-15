@@ -10,7 +10,7 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <br>
-        <h1 align='center'>Pla individualitzat</h1>
+        <h1 align='center'>Àrees amb pla individualitzat</h1>
         <br>
     </div>
 
@@ -93,7 +93,7 @@
             <br>
             <button type="submit" class="btn btn-primary">Guardar Pla Individualitzat</button>
             </fieldset>
-        </form>
+        </form>        
     </div>
 </div>
 @endsection

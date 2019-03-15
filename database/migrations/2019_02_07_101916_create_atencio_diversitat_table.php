@@ -17,12 +17,12 @@ class CreateAtencioDiversitatTable extends Migration
            $table->increments('id');
             $table->integer('alumne_id')->unsigned();
             $table->foreign('alumne_id')->references('id')->on('alumnes')->onDelete('cascade');
-            $table->integer('ed_especial');
-            $table->integer('acollida');
-            $table->integer('suport_linguistic');
-            $table->integer('sep');        
-            $table->integer('vetllador');        
-            $table->integer('at_individual');                
+            $table->boolean('ed_especial');
+            $table->boolean('acollida');
+            $table->boolean('suport_linguistic');
+            $table->boolean('sep');        
+            $table->boolean('vetllador');        
+            $table->boolean('at_individual');                
             $table->timestamps();
         });
     }

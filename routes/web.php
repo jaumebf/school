@@ -28,6 +28,11 @@ Route::get('/alumnes/plaindividualitzat/{codi}','PlaIndividualitzat@actualitzar'
 Route::post('/alumnes/plaindividualitzat/','PlaIndividualitzat@modificar');
 Route::get('/plaindividualitzat/afegir/{codi}','PlaIndividualitzat@afegir')->where('codi', '[0-9]+');
 
+//Atenció diversitat
+Route::get('/alumnes/atenciodiversitat/{codi}','AtencioDiversitat@actualitzar')->where('codi', '[0-9]+');
+Route::post('/alumnes/atenciodiversitat/','AtencioDiversitat@modificar');
+Route::get('/atenciodiversitat/afegir/{codi}','AtencioDiversitat@afegir')->where('codi', '[0-9]+');
+
 
 
 

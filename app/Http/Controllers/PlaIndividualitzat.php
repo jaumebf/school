@@ -20,8 +20,7 @@ class PlaIndividualitzat extends Controller
     }
     
     //MODIFICAR
-    public function modificar(Request $request){
-                
+    public function modificar(Request $request){                
         $pla = Pla_individualitzat::findOrFail($request->id);
         
         ($request->input('llengua')) ? $pla->llengua = 1 : $pla->llengua = 0;
@@ -55,6 +54,7 @@ class PlaIndividualitzat extends Controller
         $pla->religio = 0;
         $pla->valors = 0;       
         $pla->save();
-        return redirect('alumnes/llistat')->with('message','Pla afegit correctament');
+        return redirect('/atenciodiversitat/afegir/'.$id);        
+
     }
 }
