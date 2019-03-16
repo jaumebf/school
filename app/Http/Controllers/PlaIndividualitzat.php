@@ -54,7 +54,7 @@ class PlaIndividualitzat extends Controller
         $pla->religio = 0;
         $pla->valors = 0;       
         $pla->save();
-        return redirect('/atenciodiversitat/afegir/'.$id);        
+        return redirect('/atenciodiversitat/afegir/'.$alumne->id);
 
     }
 }

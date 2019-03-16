@@ -29,9 +29,14 @@ Route::post('/alumnes/plaindividualitzat/','PlaIndividualitzat@modificar');
 Route::get('/plaindividualitzat/afegir/{codi}','PlaIndividualitzat@afegir')->where('codi', '[0-9]+');
 
 //Atenció diversitat
-Route::get('/alumnes/atenciodiversitat/{codi}','AtencioDiversitat@actualitzar')->where('codi', '[0-9]+');
-Route::post('/alumnes/atenciodiversitat/','AtencioDiversitat@modificar');
-Route::get('/atenciodiversitat/afegir/{codi}','AtencioDiversitat@afegir')->where('codi', '[0-9]+');
+Route::get('/alumnes/atenciodiversitat/{codi}', 'AtencioDiversitat@actualitzar')->where('codi', '[0-9]+');
+Route::post('/alumnes/atenciodiversitat/', 'AtencioDiversitat@modificar');
+Route::get('/atenciodiversitat/afegir/{codi}', 'AtencioDiversitat@afegir')->where('codi', '[0-9]+');
+
+//Aspectes personals
+Route::get('/alumnes/aspectespersonals/{codi}', 'AspectesPersonals@actualitzar')->where('codi', '[0-9]+');
+Route::post('/alumnes/aspectespersonals/', 'AspectesPersonals@modificar');
+Route::get('/aspectespersonals/afegir/{codi}', 'AspectesPersonals@afegir')->where('codi', '[0-9]+');
 
 
 

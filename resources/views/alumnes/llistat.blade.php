@@ -41,6 +41,7 @@
                 <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
                 <td><a href="{{url("alumnes/plaindividualitzat",$alumne->id)}}">Pla individualitzat</a></td>
                 <td><a href="{{url("alumnes/atenciodiversitat",$alumne->id)}}">Atenció diversitat</a></td>
+                <td><a href="{{url("alumnes/aspectespersonals",$alumne->id)}}">Aspectes personals</a></td>
             </tr>
             @endforeach
         </table>

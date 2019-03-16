@@ -46,7 +46,7 @@ class AtencioDiversitat extends Controller
         $atencio->at_individual = 0;
         $atencio->save();
         
-        return redirect('alumnes/llistat');
+        return redirect('/aspectespersonals/afegir/'.$alumne->id);
 
     }
 }
