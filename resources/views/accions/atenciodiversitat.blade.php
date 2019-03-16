@@ -2,13 +2,12 @@
 @extends('layouts.app')
 @section('content')
 
+<ul class="nav justify-content-center"> 
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url("alumnes/llistat") }}">Llistar alumnes</a>
+    </li>
+</ul>        
 <div class="row justify-content-center">
-    <ul class="nav justify-content-center"> 
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ url("alumnes/llistat") }}">Llistar alumnes</a>
-        </li>
-    </ul>        
-
     <div class="col-md-4">
         <br>
         <h1 align='center'>Mesures d'atenció a la diversitat</h1>

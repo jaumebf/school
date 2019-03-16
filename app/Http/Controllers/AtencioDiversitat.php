@@ -15,7 +15,7 @@ class AtencioDiversitat extends Controller
     //ACTUALITZAR VEURE
     public function actualitzar($id){
         $atencio = Atencio_diversitat::findOrFail($id);
-        return view('plaindividualitzat.atenciodiversitat')->with('atencio',$atencio);
+        return view('accions.atenciodiversitat')->with('atencio',$atencio);
     }
     
     //MODIFICAR
@@ -35,18 +35,23 @@ class AtencioDiversitat extends Controller
     
     public function afegir($id){       
         $alumne = Alumne::findOrFail($id);        
+        $exist = Atencio_diversitat::find($id);
 
-        $atencio = new Atencio_diversitat();
-        $atencio->alumne_id = $id;
-        $atencio->ed_especial = 0;
-        $atencio->acollida = 0;
-        $atencio->suport_linguistic = 0;
-        $atencio->sep = 0;
-        $atencio->vetllador = 0;
-        $atencio->at_individual = 0;
-        $atencio->save();
+        if(!$exist) {
+            $atencio = new Atencio_diversitat();
+            $atencio->alumne_id = $id;
+            $atencio->ed_especial = 0;
+            $atencio->acollida = 0;
+            $atencio->suport_linguistic = 0;
+            $atencio->sep = 0;
+            $atencio->vetllador = 0;
+            $atencio->at_individual = 0;
+            $atencio->save();
+        }
         
         return redirect('/aspectespersonals/afegir/'.$alumne->id);
-
     }
+    
+    
+    
 }
