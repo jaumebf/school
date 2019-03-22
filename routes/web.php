@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 //Alumnes contolers
 Route::get('/alumnes/llistat/','Alumnes@llistat');
 Route::get('/alumnes/alta/','Alumnes@alta');
-Route::post('/alumnes/afegir/','Alumnes@afegir');
+Route::post('/alumnes/afegir/','Alumnes@afegirAlumne');
 Route::get('/alumnes/esborrar/{codi}','Alumnes@esborrar')->where('codi', '[0-9]+');
 Route::get('/alumnes/actualitzar/{codi}','Alumnes@actualitzar')->where('codi', '[0-9]+');
 Route::post('alumnes/actualitzar/','Alumnes@modificar');
@@ -38,6 +38,9 @@ Route::get('/alumnes/aspectespersonals/{codi}', 'AspectesPersonals@actualitzar')
 Route::post('/alumnes/aspectespersonals/', 'AspectesPersonals@modificar');
 Route::get('/aspectespersonals/afegir/{codi}', 'AspectesPersonals@afegir')->where('codi', '[0-9]+');
 
+//Aspectes personals
+Route::get('/alumnes/formulari/{codi}', 'Alumnes@actualitzarForm')->where('codi', '[0-9]+');
+Route::post('/alumnes/formulari/', 'Alumnes@modificarForm');
 
 
 
