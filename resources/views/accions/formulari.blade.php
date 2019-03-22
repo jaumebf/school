@@ -257,6 +257,50 @@
     </div>
 </div>
 <!-- FIN Pla individualitzat -->
+
+
+<!-- Faltes -->
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <br>
+        <h1 align='center'>Faltes d'assistència</h1>
+        <br>
+    </div>
+
+    <div class="col-md-10">           
+        <input type="hidden" name="id" value="{{$pla->id}}">
+
+        <div class="form-group">
+            <label for="numfaltes">Faltes d’assistència durant aquest trimestre</label>
+            <select class="form-control" name="numfaltes">
+              <option value='1'>Cap</option>
+              <option value='2'>Menys de 5</option>
+              <option value='3'>Entre 5 i 10</option>
+              <option value='4'>Entre 10 i 20</option>
+              <option value='5'>Més de 20</option>
+              <option value='6'>Més de 30</option>
+              <option value='7'>Ha faltat quasi tot el trimestre</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="numfaltes">Justificació</label>
+            <select class="form-control" name="numfaltes">
+              <option value='1'>Les faltes estan justificades</option>
+              <option value='2'>Hi ha faltes sense justificar</option>
+              <option value='3'>No s'han justificat les faltes</option>
+              </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="faltesobservacions">Observacions</label>
+            <input type="text" class="form-control" name="faltesobservacions">
+        </div>
+        
+        
+    </div>
+</div>
+<!-- FIN Faltes -->
 <div class="row justify-content-center">
 <button type="submit" class="btn btn-primary">Guardar canvis</button>
 </div>
