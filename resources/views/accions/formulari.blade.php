@@ -284,17 +284,28 @@
         </div>
         
         <div class="form-group">
-            <label for="numfaltes">Justificació</label>
-            <select class="form-control" name="numfaltes">
+            <label for="numfaltesJust">Justificació</label>
+            <select class="form-control" name="numfaltesJust">              
               <option value='1'>Les faltes estan justificades</option>
               <option value='2'>Hi ha faltes sense justificar</option>
               <option value='3'>No s'han justificat les faltes</option>
+              <option value=''>Cap falta</option>
               </select>
         </div>
         
         <div class="form-group">
-            <label for="faltesobservacions">Observacions</label>
-            <input type="text" class="form-control" name="faltesobservacions">
+            <label for="faltesComentaris">Comentaris</label>
+            <input type="text" class="form-control" name="faltesComentaris">
+        </div>
+        
+        <div class="form-group">
+            <label for="observacions">Observacions</label>
+            <textarea class="form-control" name="observacions"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="dia">Dia de creació</label>
+            <input type="text" class="form-control" name="dia" value="@if($observacions) {{$observacions->dia}} @endif">
         </div>
         
         

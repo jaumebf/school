@@ -7,6 +7,7 @@ use App\Pla_individualitzat;
 use App\Aspecte_personal;
 use App\Atencio_diversitat;
 use App\Alumne;
+use App\Observacions;
 
 class Alumnes extends Controller
 {
@@ -158,7 +159,23 @@ class Alumnes extends Controller
             $atencio->at_individual = 0;
             $atencio->save();
         }
-
+        
+        
+        
+        //Observacions faltes
+        $alumne = Alumne::findOrFail($alumne->id);        
+        $exist = Observacions::find($alumne->id);
+        
+        if(!$exist) {
+            $observacions = new Observacions();
+            $observacions->alumne_id = $alumne->id;
+            $observacions->faltes = 0;
+            $observacions->numfaltesJust = 0;
+            $observacions->observacions = '';
+            $observacions->dia = '';
+            $observacions->save();
+        }
+        
         return redirect('alumnes/llistat')->with('message','Alumne afegit correctament');
         
     }  
@@ -167,10 +184,12 @@ class Alumnes extends Controller
         $asP = Aspecte_personal::findOrFail($id);
         $pla = Pla_individualitzat::findOrFail($id);
         $atencio = Atencio_diversitat::findOrFail($id);
+        $observacions = Observacions::findOrFail($id);
         return view('accions.formulari')
                 ->with('asP',$asP)
                 ->with('pla',$pla)
-                ->with('atencio',$atencio);
+                ->with('atencio',$atencio)
+                ->with('observacions',$observacions);
     }
     
     function modificarForm(Request $request){

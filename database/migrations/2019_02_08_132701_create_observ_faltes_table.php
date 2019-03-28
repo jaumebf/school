@@ -17,9 +17,9 @@ class CreateObservFaltesTable extends Migration
             $table->increments('id');
             $table->integer('alumne_id')->unsigned();
             $table->foreign('alumne_id')->references('id')->on('alumnes')->onDelete('cascade');
-            $table->text('faltes');
+            $table->integer('faltes');
             $table->longText('observacions');
-            $table->string('data');
+            $table->string('dia');
             $table->timestamps();
         });
     }
