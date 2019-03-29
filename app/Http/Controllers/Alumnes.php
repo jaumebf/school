@@ -170,7 +170,8 @@ class Alumnes extends Controller
             $observacions = new Observacions();
             $observacions->alumne_id = $alumne->id;
             $observacions->faltes = 0;
-            $observacions->numfaltesJust = 0;
+            $observacions->numfaltesJust = 4;
+            $observacions->comentaris = '';
             $observacions->observacions = '';
             $observacions->dia = '';
             $observacions->save();
@@ -235,6 +236,17 @@ class Alumnes extends Controller
         ($request->input('valors')) ? $pla->valors = 1 : $pla->valors = 0;
         
         $pla->save();
+        
+        
+        $observacions = Observacions::findOrFail($request->id);
+
+        ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
+        ($request->input('numFaltesJust')) ? $observacions->numFaltesJust = $request->input('numFaltesJust') : $observacions->numFaltesJust = 4;
+        ($request->input('faltesComentaris')) ? $observacions->comentaris = $request->input('faltesComentaris') : $observacions->comentaris = '';
+        ($request->input('observacions')) ? $observacions->observacions = $request->input('observacions') : $observacions->observacions = '';
+        ($request->input('dia')) ? $observacions->dia = $request->input('dia') : $observacions->dia = '';
+        
+        $observacions->save();
         
         return redirect("alumnes/formulari/".$request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
     

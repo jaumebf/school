@@ -22,5 +22,10 @@ class Alumne extends Model
 		
 		return $this->hasOne('\App\Pla_individualitzat', 'id');
 	}   
+        
+        public function assignatura(){
+            
+            return $this->belongsToMany('\App\Assignatura', 'alumne_assignatura', 'alumne_id', 'assignatura_id');
+        }
     
 }

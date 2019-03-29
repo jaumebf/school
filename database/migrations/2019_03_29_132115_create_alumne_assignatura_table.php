@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmbitTable extends Migration
+class CreateAlumneAssignaturaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateAmbitTable extends Migration
      */
     public function up()
     {
-        Schema::create('ambit', function (Blueprint $table) {
+        Schema::create('alumne_assignatura', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('alumne_id')->unsigned();
+            $table->unsignedInteger('alumne_id');
+            $table->unsignedInteger('assignatura_id');
             $table->foreign('alumne_id')->references('id')->on('alumnes')->onDelete('cascade');
-            $table->string('name');
-
+            $table->foreign('assignatura_id')->references('id')->on('assignatura')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateAmbitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ambit');
+        Schema::dropIfExists('alumne_assignatura');
     }
 }

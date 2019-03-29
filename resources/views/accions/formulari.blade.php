@@ -271,36 +271,49 @@
         <input type="hidden" name="id" value="{{$pla->id}}">
 
         <div class="form-group">
-            <label for="numfaltes">Faltes d’assistència durant aquest trimestre</label>
-            <select class="form-control" name="numfaltes">
-              <option value='1'>Cap</option>
-              <option value='2'>Menys de 5</option>
-              <option value='3'>Entre 5 i 10</option>
-              <option value='4'>Entre 10 i 20</option>
-              <option value='5'>Més de 20</option>
-              <option value='6'>Més de 30</option>
-              <option value='7'>Ha faltat quasi tot el trimestre</option>
+            
+            <?php
+            $arrayNumFaltes = [
+                "Cap",
+                "Menys de 5",
+                "Entre 5 i 10",
+                "Entre 10 i 20",
+                "Més de 20",
+                "Més de 30",
+                "Ha faltat quasi tot el trimestre"];
+            ?>
+            <label for="faltes">Faltes d’assistència durant aquest trimestre</label>
+            <select class="form-control" name="faltes">
+                @for ($i=1; $i<=7; $i++)
+                  <option value='{{$i}}'@if(isset($observacions) && $i==$observacions->faltes) selected @endif>{{$arrayNumFaltes[$i-1]}}</option>
+                @endfor
+            </select>
+        </div>
+        
+        <?php
+            $arrayNumFaltesJust= [
+                "Les faltes estan justificades",
+                "Hi ha faltes sense justificar",
+                "No s'han justificat les faltes",
+                "Cap falta"];
+        ?>
+        <div class="form-group">
+            <label for="numfaltesJust">Justificació</label>
+            <select class="form-control" name="numfaltesJust"> 
+                @for ($i=1; $i<=4; $i++)
+                    <option value='{{$i}}'@if(isset($observacions) && $i==$observacions->numfaltesJust) selected @endif>{{$arrayNumFaltesJust[$i-1]}}</option>
+                @endfor
             </select>
         </div>
         
         <div class="form-group">
-            <label for="numfaltesJust">Justificació</label>
-            <select class="form-control" name="numfaltesJust">              
-              <option value='1'>Les faltes estan justificades</option>
-              <option value='2'>Hi ha faltes sense justificar</option>
-              <option value='3'>No s'han justificat les faltes</option>
-              <option value=''>Cap falta</option>
-              </select>
-        </div>
-        
-        <div class="form-group">
             <label for="faltesComentaris">Comentaris</label>
-            <input type="text" class="form-control" name="faltesComentaris">
+            <input type="text" class="form-control" name="faltesComentaris" value="@if($observacions) {{$observacions->comentaris}} @endif">
         </div>
         
         <div class="form-group">
             <label for="observacions">Observacions</label>
-            <textarea class="form-control" name="observacions"></textarea>
+            <textarea class="form-control" name="observacions">@if($observacions){{$observacions->observacions}}@endif</textarea>
         </div>
         
         <div class="form-group">

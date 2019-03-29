@@ -15,8 +15,6 @@ class CreateAssignaturaTable extends Migration
     {
         Schema::create('assignatura', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ambit_id')->unsigned();
-            $table->foreign('ambit_id')->references('id')->on('ambit')->onDelete('cascade');
             $table->integer('actitud_1');
             $table->integer('actitud_2');
             $table->integer('actitud_3');

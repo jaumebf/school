@@ -6615,3 +6615,5 @@ Did you mean one of these?
 #63 C:\\xampp\\htdocs\\school\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
 "} 
+[2019-03-29 12:53:10] local.ERROR: SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+ (SQL: select * from information_schema.tables where table_schema = school and table_name = migrations)  
