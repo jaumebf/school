@@ -18,7 +18,7 @@
 
     <div class="col-md-10">
         <br>
-        <h1 align='center'>Llista de alumnes</h1>
+        <h1 align='center'>Llista d'alumnes</h1>
 
         <table class="table table-striped">
             <tr>

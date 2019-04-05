@@ -284,8 +284,8 @@
             ?>
             <label for="faltes">Faltes d’assistència durant aquest trimestre</label>
             <select class="form-control" name="faltes">
-                @for ($i=1; $i<=7; $i++)
-                  <option value='{{$i}}'@if(isset($observacions) && $i==$observacions->faltes) selected @endif>{{$arrayNumFaltes[$i-1]}}</option>
+                @for ($i=0; $i<sizeof($arrayNumFaltes); $i++)
+                  <option value='{{$i+1}}'@if(isset($observacions) && $i+1==$observacions->faltes) selected @endif>{{$arrayNumFaltes[$i]}}</option>
                 @endfor
             </select>
         </div>
@@ -298,10 +298,10 @@
                 "Cap falta"];
         ?>
         <div class="form-group">
-            <label for="numfaltesJust">Justificació</label>
-            <select class="form-control" name="numfaltesJust"> 
-                @for ($i=1; $i<=4; $i++)
-                    <option value='{{$i}}'@if(isset($observacions) && $i==$observacions->numfaltesJust) selected @endif>{{$arrayNumFaltesJust[$i-1]}}</option>
+            <label for="numFaltesJust">Justificació</label>
+            <select class="form-control" name="numFaltesJust"> 
+                @for ($i=0; $i<sizeof($arrayNumFaltesJust); $i++)
+                    <option value='{{$i+1}}'@if(isset($observacions) && $i+1==$observacions->numfaltesJust) selected @endif>{{$arrayNumFaltesJust[$i]}}</option>
                 @endfor
             </select>
         </div>

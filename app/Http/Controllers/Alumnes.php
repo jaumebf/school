@@ -8,6 +8,8 @@ use App\Aspecte_personal;
 use App\Atencio_diversitat;
 use App\Alumne;
 use App\Observacions;
+use App\Assignatura;
+use App\Alumne_Assignatura;
 
 class Alumnes extends Controller
 {
@@ -160,6 +162,31 @@ class Alumnes extends Controller
             $atencio->save();
         }
         
+        //Assignatures
+        $assignatures = Alumne_Assignatura::findOrFail($alumne->id);
+        $numAssignatures = Assignatura::count();
+        for($i=0; $i<=$numAssignatures; $i++/*putu jaume es imbecil i no sap explicarse gilipolles*/){
+            $assignatures->assignatura_id = $i+1;
+            $assignatures->actitud_1 = 0;
+            $assignatures->actitud_2 = 0;
+            $assignatures->actitud_3 = 0;
+            $assignatures->esforc_1 = 0;
+            $assignatures->esforc_2 = 0;
+            $assignatures->esforc_3 = 0;
+            $assignatures->treball_1 = 0;
+            $assignatures->treball_2 = 0;
+            $assignatures->treball_3 = 0;
+            $assignatures->deures_1 = 0;
+            $assignatures->deures_2 = 0;
+            $assignatures->deures_3 = 0;
+            $assignatures->adaptats = 0;
+            $assignatures->nota = 0;
+            $assignatures->comentari_1 = 0;
+            $assignatures->comentari_2 = 0;
+            $assignatures->comentari_3 = 0;
+            $assignatures->comentari_4 = 0;
+            $assignatures->observacions = '';
+        }
         
         
         //Observacions faltes
@@ -170,7 +197,7 @@ class Alumnes extends Controller
             $observacions = new Observacions();
             $observacions->alumne_id = $alumne->id;
             $observacions->faltes = 0;
-            $observacions->numfaltesJust = 4;
+            $observacions->comentaris = 4;
             $observacions->comentaris = '';
             $observacions->observacions = '';
             $observacions->dia = '';
