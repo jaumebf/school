@@ -103,9 +103,10 @@ class Alumnes extends Controller
         $alumne->dob = $request->dob;
         $alumne->save();
         
+        $alumne = Alumne::findOrFail($alumne->id);
+        
         
         //Aspectes personals
-        $alumne = Alumne::findOrFail($alumne->id);
         $exist = Aspecte_personal::find($alumne->id);
 
         if (!$exist) {
@@ -126,8 +127,8 @@ class Alumnes extends Controller
         
         
         //Pla individualitzat
-        $alumne = Alumne::findOrFail($alumne->id);
-        $exist = Pla_individualitzat::find($alumne->id);
+        //$alumne = Alumne::findOrFail($alumne->id);
+        $exist = Pla_individualitzat::find($alumne->alumne_id);
 
         if (!$exist) {
             $pla = new Pla_individualitzat();
@@ -147,7 +148,7 @@ class Alumnes extends Controller
         
         
         //Atenció diversitat
-        $alumne = Alumne::findOrFail($alumne->id);        
+        //$alumne = Alumne::findOrFail($alumne->id);        
         $exist = Atencio_diversitat::find($alumne->id);
 
         if(!$exist) {
@@ -162,32 +163,42 @@ class Alumnes extends Controller
             $atencio->save();
         }
         
-        //Assignatures
-        $assignatures = Alumne_Assignatura::findOrFail($alumne->id);
-        $numAssignatures = Assignatura::count();
-        for($i=0; $i<=$numAssignatures; $i++/*putu jaume es imbecil i no sap explicarse gilipolles*/){
-            $assignatures->assignatura_id = $i+1;
-            $assignatures->actitud_1 = 0;
-            $assignatures->actitud_2 = 0;
-            $assignatures->actitud_3 = 0;
-            $assignatures->esforc_1 = 0;
-            $assignatures->esforc_2 = 0;
-            $assignatures->esforc_3 = 0;
-            $assignatures->treball_1 = 0;
-            $assignatures->treball_2 = 0;
-            $assignatures->treball_3 = 0;
-            $assignatures->deures_1 = 0;
-            $assignatures->deures_2 = 0;
-            $assignatures->deures_3 = 0;
-            $assignatures->adaptats = 0;
-            $assignatures->nota = 0;
-            $assignatures->comentari_1 = 0;
-            $assignatures->comentari_2 = 0;
-            $assignatures->comentari_3 = 0;
-            $assignatures->comentari_4 = 0;
-            $assignatures->observacions = '';
-        }
         
+        //Assignatures        
+        $exist = Alumne_Assignatura::where("alumne_id",$alumne->id)->first();
+        if(!$exist) {        
+       
+            $numAssignatures = count(Assignatura::get());
+
+            for($i=0; $i<$numAssignatures; $i++){
+                $assignatures = new Alumne_Assignatura();
+                $assignatures->assignatura_id = $i+1;
+                $assignatures->alumne_id = $alumne->id;
+                $assignatures->actitud_1 = 0;
+                $assignatures->actitud_2 = 0;
+                $assignatures->actitud_3 = 0;
+                $assignatures->esforc_1 = 0;
+                $assignatures->esforc_2 = 0;
+                $assignatures->esforc_3 = 0;
+                $assignatures->treball_1 = 0;
+                $assignatures->treball_2 = 0;
+                $assignatures->treball_3 = 0;
+                $assignatures->deures_1 = 0;
+                $assignatures->deures_2 = 0;
+                $assignatures->deures_3 = 0;
+                $assignatures->adaptats = 0;
+                $assignatures->qualificacio_1 = 0;
+                $assignatures->qualificacio_2 = 0;
+                $assignatures->qualificacio_3 = 0;
+                $assignatures->comentari_1 = 0;
+                $assignatures->comentari_2 = 0;
+                $assignatures->comentari_3 = 0;
+                $assignatures->comentari_4 = 0;
+                $assignatures->observacions = '';
+                $assignatures->save();
+            }
+        
+        }
         
         //Observacions faltes
         $alumne = Alumne::findOrFail($alumne->id);        
@@ -213,11 +224,21 @@ class Alumnes extends Controller
         $pla = Pla_individualitzat::findOrFail($id);
         $atencio = Atencio_diversitat::findOrFail($id);
         $observacions = Observacions::findOrFail($id);
+        $alumneAssignaturaExist = Alumne_Assignatura::where("alumne_id",$id)->firstOrFail();
+        
+        $alumneAssignatura=false;
+        if($alumneAssignaturaExist){
+            $alumneAssignatura = Alumne_Assignatura::where("alumne_id",$id)->get();   
+        }          
+        $assignatures = Assignatura::all();
+               
         return view('accions.formulari')
                 ->with('asP',$asP)
                 ->with('pla',$pla)
                 ->with('atencio',$atencio)
-                ->with('observacions',$observacions);
+                ->with('observacions',$observacions)
+                ->with('assignatures',$assignatures)
+                ->with('alumneAssignatura',$alumneAssignatura);
     }
     
     function modificarForm(Request $request){

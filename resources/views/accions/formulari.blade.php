@@ -284,7 +284,7 @@
             ?>
             <label for="faltes">Faltes d’assistència durant aquest trimestre</label>
             <select class="form-control" name="faltes">
-                @for ($i=0; $i<sizeof($arrayNumFaltes); $i++)
+                @for ($i=0; $i< sizeof($arrayNumFaltes); $i++)
                   <option value='{{$i+1}}'@if(isset($observacions) && $i+1==$observacions->faltes) selected @endif>{{$arrayNumFaltes[$i]}}</option>
                 @endfor
             </select>
@@ -300,7 +300,7 @@
         <div class="form-group">
             <label for="numFaltesJust">Justificació</label>
             <select class="form-control" name="numFaltesJust"> 
-                @for ($i=0; $i<sizeof($arrayNumFaltesJust); $i++)
+                @for ($i=0; $i< sizeof($arrayNumFaltesJust); $i++)
                     <option value='{{$i+1}}'@if(isset($observacions) && $i+1==$observacions->numfaltesJust) selected @endif>{{$arrayNumFaltesJust[$i]}}</option>
                 @endfor
             </select>
@@ -319,6 +319,56 @@
         <div class="form-group">
             <label for="dia">Dia de creació</label>
             <input type="text" class="form-control" name="dia" value="@if($observacions) {{$observacions->dia}} @endif">
+        </div>
+        
+        <div class="form-group">
+            @foreach($assignatures as $assignatura)
+                <label for="{{ $assignatura->nom }}"> {{ $assignatura->nom }}</label><br>
+                 
+                   
+                
+                @foreach($alumneAssignatura as $alumneAssignatures)
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                           <label>Actitud 1</label><br>
+                           <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_1 }}" name="">                    
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                           <label>Actitud 2</label><br>
+                           <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_2 }}" name="">                    
+                        </div>
+                        
+                        <div class="form-group col-md-2">
+                            <label>Actitud 3</label><br>                    
+                            <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_3 }}" name="">
+                        </div>
+                    </div>
+                <br>
+                    
+                    <div class="form-row">                        
+                        <div class="form-group col-md-6">                        
+                            <label>Esforç 1</label><br>                    
+                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_1 }}" name="">
+                        </div>
+                        
+                        <div class="form-group col-md-4">                        
+                            <label>Esforç 2</label><br>                    
+                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_2 }}" name="">
+                        </div>
+                        
+                        <div class="form-group col-md-2">                        
+                            <label>Esforç 3</label><br>                    
+                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_3 }}" name="">
+                        </div>
+                    </div>
+                        
+                        
+
+                    
+                    @break
+                @endforeach
+            @endforeach
         </div>
         
         
