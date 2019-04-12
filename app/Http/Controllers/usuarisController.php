@@ -19,30 +19,6 @@ class usuarisController extends Controller
         return view('usuaris.llistatUsuaris')->with('usuaris',$llistat);              
     }
     
-    /*public function canviarPassword(Request $request){
-        $request->validate([
-            'password' => 'required|max:10',
-            ]); 
-        
-        $usuari = User::findOrFail($request->id);
-        $producte->password = $request->password;
-        $producte->save();        
-        return redirect('/usuaris')
-        ->with('status','Contrasenya modificada');
-    }
-    
-    public function canviarRol(Request $request){
-        $request->validate([
-            'password' => 'required|max:10',
-            ]); 
-        
-        $usuari = User::findOrFail($request->id);
-        $producte->password = $request->password;
-        $producte->save();        
-        return redirect('/usuaris')
-        ->with('status','Contrasenya modificada');
-    }*/
-    
     public function esborrarUsuari($id){
         $usuari = User::findOrFail($id);
         try{

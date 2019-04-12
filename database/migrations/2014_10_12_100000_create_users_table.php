@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role');
+            $table->integer('role');
             $table->string('name');
             $table->string('surname');
             $table->string('email', 100)->unique();
@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
         // Insert some stuff
         DB::table('users')->insert(
             array(
-                'role' => 'admin',
+                'role' => '0',
                 'name' => 'admin',
                 'surname' => 'admin',
                 'email' => 'admin@admin.com',
