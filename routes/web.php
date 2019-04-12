@@ -15,13 +15,19 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//Alumnes contolers
+//Alumnes controllers
 Route::get('/alumnes/llistat/','Alumnes@llistat');
 Route::get('/alumnes/alta/','Alumnes@alta');
 Route::post('/alumnes/afegir/','Alumnes@afegirAlumne');
 Route::get('/alumnes/esborrar/{codi}','Alumnes@esborrar')->where('codi', '[0-9]+');
 Route::get('/alumnes/actualitzar/{codi}','Alumnes@actualitzar')->where('codi', '[0-9]+');
 Route::post('alumnes/actualitzar/','Alumnes@modificar');
+
+ //Usuaris
+Route::get('/usuaris/llistat','usuarisController@llistarUsuaris');
+Route::post('/usuaris/llistat','usuarisController@canviarPassword');
+Route::get('/usuaris/canviarRol/{codi}','usuarisController@canviarRol')->where('codi', '[0-9]+');
+Route::get('/usuaris/esborrar/{codi}','usuarisController@esborrarUsuari')->where('codi', '[0-9]+');
 
 //Pla Individualtzat
 Route::get('/alumnes/plaindividualitzat/{codi}','PlaIndividualitzat@actualitzar')->where('codi', '[0-9]+');

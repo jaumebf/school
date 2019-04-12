@@ -50,26 +50,8 @@
                             <a href="{{ url('/alumnes/llistat') }}" class="nav-link">Alumnes</a>
                         </li>
                         
-                         <li class="nav-item"></li>
-                        
                         <li class="nav-item">
-                            <a href="{{ url('/professors/llistat') }}" class="nav-link">Ambit</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="{{ url('/alumnes/llistat') }}" class="nav-link">Assignatura</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="{{ url('/professors/llistat') }}" class="nav-link">Aspectes personals</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="{{ url('/alumnes/llistat') }}" class="nav-link">Atenció a la diversitat</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="{{ url('/professors/llistat') }}" class="nav-link">Observacions i faltes</a>
+                            <a href="{{ url('/usuaris/llistat') }}" class="nav-link">Professors</a>
                         </li>
 
                             <li class="nav-item dropdown">
