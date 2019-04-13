@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<ul class="nav justify-content-center"> 
-  <li class="nav-item">
-    <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
-  </li>
-</ul>
-
+@if(AUTH::user()->role != 1)
+    <ul class="nav justify-content-center"> 
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
+        </li>
+    </ul>
+@endif
 <div class="row justify-content-center">
     <div class="col-md-9">
         @if (session('message'))
@@ -25,10 +26,10 @@
                 <th>NOM</th>
                 <th>COGNOM</th>
                 <th>DNI</th>
-                <th>COURSE</th>
-                <th>CLASS</th>
-                <th>Date of Birthday</th>
-                <th colspan="3">Accions</th>
+                <th>CURS</th>
+                <th>CLASSE</th>
+                <th>DATA DE NAIXEMENT</th>
+                <th colspan="3">ACCIONS</th>
             </tr>
 
             @foreach($alumnes as $alumne)
@@ -38,9 +39,11 @@
                 <td>{{$alumne->dni}}</td>        
                 <td>{{$alumne->course}}</td>        
                 <td>{{$alumne->class}}</td>        
-                <td>{{$alumne->dob}}</td>        
-                <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
-                <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
+                <td>{{$alumne->dob}}</td>
+                @if(AUTH::user()->role != 1)
+                    <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
+                    <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
+                @endif
                 <td><a href="{{url("alumnes/formulari",$alumne->id)}}">Notes</a></td>
             </tr>
             @endforeach
