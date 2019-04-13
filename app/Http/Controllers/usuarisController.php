@@ -15,7 +15,7 @@ class usuarisController extends Controller
     
     public function llistarUsuaris(){
         //$llistat = \App\Product::all(); TOTS
-        $llistat = \App\User::paginate(7);
+        $llistat = User::paginate(7);
         return view('usuaris.llistatUsuaris')->with('usuaris',$llistat);              
     }
     

@@ -40,10 +40,7 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
+                            </li>                           
                         @else
                         
                         <li class="nav-item">
@@ -51,7 +48,7 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a href="{{ url('/usuaris/llistat') }}" class="nav-link">Professors</a>
+                            <a href="{{ url('/usuaris/') }}" class="nav-link">Professors</a>
                         </li>
 
                             <li class="nav-item dropdown">

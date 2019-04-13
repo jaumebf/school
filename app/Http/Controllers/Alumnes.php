@@ -44,7 +44,8 @@ class Alumnes extends Controller
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:1|max:8',
+            'curs' => 'required|numeric|min:1|max:6',
+            'classe' => 'required|max:1',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
             ]); 
@@ -54,6 +55,7 @@ class Alumnes extends Controller
         $alumne->surname = $request->cognom;
         $alumne->dni = $request->dni;
         $alumne->course = $request->curs;
+        $alumne->class = $request->classe;
         $alumne->dob = $request->dob;
         $alumne->save();        
         return redirect('alumnes/llistat')->with('message','Alumne actualitzat correctament');
@@ -68,10 +70,11 @@ class Alumnes extends Controller
     
     //AFEGIR
     public function afegir(Request $request){
+       
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:1|max:8',
+            'curs' => 'required|numeric|min:1|max:6',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
             ]); 
@@ -91,6 +94,7 @@ class Alumnes extends Controller
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
             'curs' => 'required|numeric|min:1|max:8',
+            'classe' => 'required|max:1',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
             ]); 
@@ -100,6 +104,7 @@ class Alumnes extends Controller
         $alumne->surname = $request->cognom;
         $alumne->dni = $request->dni;
         $alumne->course = $request->curs;
+        $alumne->class = $request->classe;
         $alumne->dob = $request->dob;
         $alumne->save();
         

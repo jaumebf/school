@@ -26,6 +26,7 @@
                 <th>COGNOM</th>
                 <th>DNI</th>
                 <th>COURSE</th>
+                <th>CLASS</th>
                 <th>Date of Birthday</th>
                 <th colspan="3">Accions</th>
             </tr>
@@ -36,6 +37,7 @@
                 <td>{{$alumne->surname}}</td>
                 <td>{{$alumne->dni}}</td>        
                 <td>{{$alumne->course}}</td>        
+                <td>{{$alumne->class}}</td>        
                 <td>{{$alumne->dob}}</td>        
                 <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
                 <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>

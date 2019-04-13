@@ -24,8 +24,8 @@ Route::get('/alumnes/actualitzar/{codi}','Alumnes@actualitzar')->where('codi', '
 Route::post('alumnes/actualitzar/','Alumnes@modificar');
 
  //Usuaris
-Route::get('/usuaris/llistat','usuarisController@llistarUsuaris');
-Route::post('/usuaris/llistat','usuarisController@canviarPassword');
+Route::get('/usuaris/','usuarisController@llistarUsuaris');
+Route::post('/usuaris/','usuarisController@canviarPassword');
 Route::get('/usuaris/canviarRol/{codi}','usuarisController@canviarRol')->where('codi', '[0-9]+');
 Route::get('/usuaris/esborrar/{codi}','usuarisController@esborrarUsuari')->where('codi', '[0-9]+');
 

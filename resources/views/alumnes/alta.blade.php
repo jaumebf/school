@@ -49,6 +49,18 @@
                 <strong>{{ $errors->first('curs') }}</strong>                  
                 @endif    
             </div>
+            
+            <?php
+                $class = ["A","B"];
+            ?>
+            <div class="form-group" name="classe">
+                <label for="classe" class="col-sm-2 col-form-label col-form-label-sm">Classe</label>
+                <select class="form-control" name="classe">
+                    @for ($i=0; $i< sizeof($class); $i++)
+                      <option value='{{$class[$i]}}'>{{$class[$i]}}</option>
+                    @endfor
+                </select>
+            </div>
 
             <div class="form-group {{ $errors->has('dob') ? 'is-invalid' : '' }}" name="dob">
                 <label for="dob" class="col-sm-2 col-form-label col-form-label-sm">Data de naixement</label>               

@@ -19,6 +19,7 @@ class CreateAlumnesTable extends Migration
             $table->string('surname');
             $table->string('dni');
             $table->integer('course');
+            $table->string('class');
             $table->date('dob');
             $table->timestamps();
         });
