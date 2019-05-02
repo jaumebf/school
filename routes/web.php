@@ -30,16 +30,20 @@ Route::middleware(['isAdmin'])->group(function() {
     Route::post('/usuaris/alta', 'usuarisController@afegirUsuari');
     Route::post('/usuaris/', 'usuarisController@canviarPassword');
     Route::get('/usuaris/canviarRol/{codi}', 'usuarisController@canviarRol')->where('codi', '[0-9]+');
-    Route::get('/usuaris/esborrar/{codi}', 'usuarisController@esborrarUsuari')->where('codi', '[0-9]+');
+    Route::get('/usuaris/esborrar/{codi}', 'usuarisController@esborrarUsuari')->where('codi', '[0-9]+');    
 });
 
 //Alumnes
 Route::get('/alumnes/llistat/', 'Alumnes@llistat');
+
+//Notes
+Route::get('/alumnes/formulari/{codi}', 'Alumnes@actualitzarForm')->where('codi', '[0-9]+');
+Route::post('/alumnes/formulari/', 'Alumnes@modificarForm');
+
 /*Route::get('/alumnes/alta/', 'Alumnes@alta');
 Route::post('/alumnes/afegir/', 'Alumnes@afegirAlumne');
 Route::get('/alumnes/esborrar/{codi}', 'Alumnes@esborrar')->where('codi', '[0-9]+');
 Route::get('/alumnes/actualitzar/{codi}', 'Alumnes@actualitzar')->where('codi', '[0-9]+');
-Route::post('alumnes/actualitzar/', 'Alumnes@modificar');
 
 
 //Usuaris
@@ -63,11 +67,8 @@ Route::get('/atenciodiversitat/afegir/{codi}', 'AtencioDiversitat@afegir')->wher
 //Aspectes personals
 Route::get('/alumnes/aspectespersonals/{codi}', 'AspectesPersonals@actualitzar')->where('codi', '[0-9]+');
 Route::post('/alumnes/aspectespersonals/', 'AspectesPersonals@modificar');
-Route::get('/aspectespersonals/afegir/{codi}', 'AspectesPersonals@afegir')->where('codi', '[0-9]+');
+Route::get('/aspectespersonals/afegir/{codi}', 'AspectesPersonals@afegir')->where('codi', '[0-9]+');*/
 
-//Aspectes personals
-Route::get('/alumnes/formulari/{codi}', 'Alumnes@actualitzarForm')->where('codi', '[0-9]+');
-Route::post('/alumnes/formulari/', 'Alumnes@modificarForm');*/
 
 
 

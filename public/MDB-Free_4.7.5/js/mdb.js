@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB FREE: 4.7.6
+ * Version: MDB FREE: 4.7.5
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -36,7 +36,6 @@
   waves.js
   forms-free.js
   enhanced-modals.js
-  treeview.js
 
 */
 
@@ -15752,6 +15751,10 @@ var _this = void 0;
       fileName = e.target.value.split('\\').pop();
     }
 
-    fileName ? $label.find('.span-choose-file').html(fileName) : $label.html($label.html());
+    if (fileName) {
+      $label.find('.span-choose-file').html(fileName);
+    } else {
+      $label.html($label.html());
+    }
   });
 })(jQuery);

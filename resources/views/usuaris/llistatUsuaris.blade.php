@@ -28,7 +28,7 @@
     <div class="col-md-10">
         <br>
         <h1 align='center'>Llista d'usuaris</h1>
-        <table id="tpart" class="table table-striped">
+        <table id="tpart" name="tpart" class="table table-striped">
             <tr>
                 <th>EMAIL</th>
                 <th>CONTRASENYA</th>
@@ -62,17 +62,22 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<link href="{{ asset('MDB-Free_4.7/js/jquery-3.3.1.min.js') }}" rel="script">
-<link href="{{ asset('MDB-Free_4.7/js/mdb.js') }}" rel="script">
-<link href="{{ asset('MDB-Free_4.7/js/mdb.min.js') }}" rel="script">
-<link href="{{ asset('MDB-Free_4.7/js/addons/datatables.min.js') }}" rel="script">
-<link href="{{ asset('MDB-Free_4.7/js/addons/datatables-select.min.js') }}" rel="script">
+
+
+<script src="{{ asset('MDB-Free_4.7.5/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('MDB-Free_4.7.5/js/mdb.js') }}"></script>
+<script src="{{ asset('MDB-Free_4.7.5/js/addons/datatables.js') }}"></script>
+<script src="{{ asset('MDB-Free_4.7.5/js/addons/datatables.min.js') }}"></script>
+<script src="{{ asset('MDB-Free_4.7.5/js/addons/datatables-select.min.js') }}"></script>
+
 
 
 <script>
+$(document).ready(function() {
+     alert("jQuery esta funcionando !!");
+   });
+   
 $(document).ready(function () {
     $('#tpart').DataTable({
         pagingType: "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
@@ -80,5 +85,8 @@ $(document).ready(function () {
     });
     $('.dataTables_length').addClass('bs-select');
 });
+
+
+
 </script>
 @endsection

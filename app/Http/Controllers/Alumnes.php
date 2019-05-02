@@ -301,6 +301,41 @@ class Alumnes extends Controller
         
         $observacions->save();
         
+        $exist = Alumne_Assignatura::where($request->id)->first();
+        if(!$exist) {        
+       
+            $numAssignatures = count(Assignatura::get());
+
+            for($i=0; $i<$numAssignatures; $i++){
+                $assignatures = Alumne_Assignatura::findOrFail($request->id);
+                $assignatures->assignatura_id = $i+1;
+               // $assignatures->alumne_id =  ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
+                $assignatures->actitud_1 = 0;
+                $assignatures->actitud_2 = 0;
+                $assignatures->actitud_3 = 0;
+                $assignatures->esforc_1 = 0;
+                $assignatures->esforc_2 = 0;
+                $assignatures->esforc_3 = 0;
+                $assignatures->treball_1 = 0;
+                $assignatures->treball_2 = 0;
+                $assignatures->treball_3 = 0;
+                $assignatures->deures_1 = 0;
+                $assignatures->deures_2 = 0;
+                $assignatures->deures_3 = 0;
+                $assignatures->adaptats = 0;
+                $assignatures->qualificacio_1 = 0;
+                $assignatures->qualificacio_2 = 0;
+                $assignatures->qualificacio_3 = 0;
+                $assignatures->comentari_1 = 0;
+                $assignatures->comentari_2 = 0;
+                $assignatures->comentari_3 = 0;
+                $assignatures->comentari_4 = 0;
+                $assignatures->observacions = '';
+                $assignatures->save();
+            }
+        
+        }
+        
         return redirect("alumnes/formulari/".$request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
     
     }

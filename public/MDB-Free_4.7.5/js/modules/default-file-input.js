@@ -13,6 +13,10 @@
       fileName = e.target.value.split('\\').pop();
     }
 
-    fileName ? $label.find('.span-choose-file').html(fileName) : $label.html($label.html());
+    if (fileName) {
+      $label.find('.span-choose-file').html(fileName);
+    } else {
+      $label.html($label.html());
+    }
   });
 })(jQuery);
