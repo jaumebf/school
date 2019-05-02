@@ -2,11 +2,11 @@
 
 @section('content')
 @if(AUTH::user()->role != 1)
-    <ul class="nav justify-content-center"> 
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
-        </li>
-    </ul>
+<ul class="nav justify-content-center"> 
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
+    </li>
+</ul>
 @endif
 <div class="row justify-content-center">
     <div class="col-md-9">
@@ -21,17 +21,19 @@
         <br>
         <h1 align='center'>Llista d'alumnes</h1>
 
-        <table class="table table-striped">
-            <tr>
-                <th>NOM</th>
-                <th>COGNOM</th>
-                <th>DNI</th>
-                <th>CURS</th>
-                <th>CLASSE</th>
-                <th>DATA DE NAIXEMENT</th>
-                <th colspan="3">ACCIONS</th>
-            </tr>
-
+        <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="th-sm">NOM</th>
+                    <th class="th-sm">COGNOM</th>
+                    <th class="th-sm">DNI</th>
+                    <th class="th-sm">CURS</th>
+                    <th class="th-sm">CLASSE</th>
+                    <th class="th-sm">DATA DE NAIXEMENT</th>
+                    <th class="th-sm" colspan="3">ACCIONS</th>
+                </tr>
+            </thead>
+            <tbody>
             @foreach($alumnes as $alumne)
             <tr>
                 <td>{{$alumne->name}}</td>
@@ -41,12 +43,13 @@
                 <td>{{$alumne->class}}</td>        
                 <td>{{$alumne->dob}}</td>
                 @if(AUTH::user()->role != 1)
-                    <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
-                    <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
+                <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
+                <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
                 @endif
                 <td><a href="{{url("alumnes/formulari",$alumne->id)}}">Notes</a></td>
             </tr>
             @endforeach
+            </tbody>
         </table>
 
         <div class="row justify-content-center">
@@ -55,5 +58,42 @@
             </ul>
         </div>
     </div>
+    
+    <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Name
+      </th>
+      <th class="th-sm">Position
+      </th>
+      <th class="th-sm">Office
+      </th>
+      <th class="th-sm">Age
+      </th>
+      <th class="th-sm">Start date
+      </th>
+      <th class="th-sm">Salary
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tiger Nixon</td>
+      <td>System Architect</td>
+      <td>Edinburgh</td>
+      <td>61</td>
+      <td>2011/04/25</td>
+      <td>$320,800</td>
+    </tr>
+    <tr>
+      <td>Tiger Nixon</td>
+      <td>System Architect</td>
+      <td>Edinburgh</td>
+      <td>61</td>
+      <td>2011/04/25</td>
+      <td>$320,800</td>
+    </tr>
+  </tbody>
+  </table>
 </div>
 @endsection
