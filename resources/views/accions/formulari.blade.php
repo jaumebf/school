@@ -320,26 +320,27 @@
             <label for="dia">Dia de creació</label>
             <input type="text" class="form-control" name="dia" value="@if($observacions) {{$observacions->dia}} @endif">
         </div>
+        <br>
         
         <div class="form-group">
                            
                 
                 @foreach($alumneAssignatura as $alumneAssignatures)
-                <label> {{ $assignatures[$alumneAssignatures->assignatura_id-1]->nom }}</label><br>
+                <label><b> {{ $assignatures[$alumneAssignatures->assignatura_id-1]->nom }}</b></label><br>
                     <div class="form-row">                       
                         <div class="form-group col-md-6">
                            <label>Actitud 1</label><br>
-                           <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_1 }}" name="actitud1_{{$alumneAssignatures->assignatura_id}}">                    
+                           <input class="form-control" type="number" value="{{ $alumneAssignatures->actitud_1 }}" name="actitud1_{{$alumneAssignatures->assignatura_id}}">                    
                         </div>
                         
                         <div class="form-group col-md-4">
                            <label>Actitud 2</label><br>
-                           <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_2 }}" name="actitud2_{{$alumneAssignatures->assignatura_id}}">                    
+                           <input class="form-control" type="number" value="{{ $alumneAssignatures->actitud_2 }}" name="actitud2_{{$alumneAssignatures->assignatura_id}}">                    
                         </div>
                         
                         <div class="form-group col-md-2">
                             <label>Actitud 3</label><br>                    
-                            <input class="form-control" type="text" value="{{ $alumneAssignatures->actitud_3 }}" name="actitud3_{{$alumneAssignatures->assignatura_id}}">
+                            <input class="form-control" type="number" value="{{ $alumneAssignatures->actitud_3 }}" name="actitud3_{{$alumneAssignatures->assignatura_id}}">
                         </div>
                     </div>
                 <br>
@@ -347,19 +348,20 @@
                     <div class="form-row">                        
                         <div class="form-group col-md-6">                        
                             <label>Esforç 1</label><br>                    
-                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_1 }}" name="esforc1_{{$alumneAssignatures->assignatura_id}}">
+                            <input class="form-control" type="number" value="{{ $alumneAssignatures->esforc_1 }}" name="esforc1_{{$alumneAssignatures->assignatura_id}}">
                         </div>
                         
                         <div class="form-group col-md-4">                        
                             <label>Esforç 2</label><br>                    
-                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_2 }}" name="esforc2_{{$alumneAssignatures->assignatura_id}}">
+                            <input class="form-control" type="number" value="{{ $alumneAssignatures->esforc_2 }}" name="esforc2_{{$alumneAssignatures->assignatura_id}}">
                         </div>
                         
                         <div class="form-group col-md-2">                        
                             <label>Esforç 3</label><br>                    
-                            <input class="form-control" type="text" value="{{ $alumneAssignatures->esforc_3 }}" name="esforc3_{{$alumneAssignatures->assignatura_id}}">
+                            <input class="form-control" type="number" value="{{ $alumneAssignatures->esforc_3 }}" name="esforc3_{{$alumneAssignatures->assignatura_id}}">
                         </div>
                     </div>
+                <br>
                 @endforeach
         </div>
         

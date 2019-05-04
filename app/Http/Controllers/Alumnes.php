@@ -11,36 +11,35 @@ use App\Observacions;
 use App\Assignatura;
 use App\Alumne_Assignatura;
 
-class Alumnes extends Controller
-{
-    public function __construct()
-    {
+class Alumnes extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
-    
+
     //LLISTAR
-    public function llistat(){
+    public function llistat() {
         //$llistat = \App\Product::all(); TOTS
         $llistat = Alumne::orderBy('course')->paginate(12);
-        return view('alumnes.llistat')->with('alumnes',$llistat);              
+        return view('alumnes.llistat')->with('alumnes', $llistat);
     }
-    
+
     //ESBORRAR
-    public function esborrar($id){          
+    public function esborrar($id) {
         $alumne = Alumne::findOrFail($id);
         $alumne->delete();
-        
-        return redirect('alumnes/llistat')->with('message','Alumne esborrat correctament');
+
+        return redirect('alumnes/llistat')->with('message', 'Alumne esborrat correctament');
     }
-    
+
     //ACTUALITZAR VEURE
-    public function actualitzar($id){
+    public function actualitzar($id) {
         $alumne = Alumne::findOrFail($id);
-        return view('alumnes.actualitzar')->with('alumne',$alumne);
+        return view('alumnes.actualitzar')->with('alumne', $alumne);
     }
-    
+
     //MODIFICAR
-    public function modificar(Request $request){
+    public function modificar(Request $request) {
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
@@ -48,8 +47,8 @@ class Alumnes extends Controller
             'classe' => 'required|max:1',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
-            ]); 
-        
+        ]);
+
         $alumne = Alumne::findOrFail($request->id);
         $alumne->name = $request->nom;
         $alumne->surname = $request->cognom;
@@ -57,28 +56,26 @@ class Alumnes extends Controller
         $alumne->course = $request->curs;
         $alumne->class = $request->classe;
         $alumne->dob = $request->dob;
-        $alumne->save();        
-        return redirect('alumnes/llistat')->with('message','Alumne actualitzat correctament');
+        $alumne->save();
+        return redirect('alumnes/llistat')->with('message', 'Alumne actualitzat correctament');
     }
-    
- 
+
     //ALTA MOSTRAR FORMULARI
-    public function alta(){
+    public function alta() {
         return view('alumnes.alta');
     }
-    
-    
+
     //AFEGIR
-    public function afegir(Request $request){
-       
+    public function afegir(Request $request) {
+
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
             'curs' => 'required|numeric|min:1|max:6',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
-            ]); 
-        
+        ]);
+
         $alumne = new Alumne();
         $alumne->name = $request->nom;
         $alumne->surname = $request->cognom;
@@ -86,10 +83,10 @@ class Alumnes extends Controller
         $alumne->course = $request->curs;
         $alumne->dob = $request->dob;
         $alumne->save();
-        return redirect('/plaindividualitzat/afegir/'.$alumne->id);
+        return redirect('/plaindividualitzat/afegir/' . $alumne->id);
     }
-    
-    public function afegirAlumne(Request $request){
+
+    public function afegirAlumne(Request $request) {
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
@@ -97,8 +94,8 @@ class Alumnes extends Controller
             'classe' => 'required|max:1',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
-            ]); 
-        
+        ]);
+
         $alumne = new Alumne();
         $alumne->name = $request->nom;
         $alumne->surname = $request->cognom;
@@ -107,10 +104,10 @@ class Alumnes extends Controller
         $alumne->class = $request->classe;
         $alumne->dob = $request->dob;
         $alumne->save();
-        
+
         $alumne = Alumne::findOrFail($alumne->id);
-        
-        
+
+
         //Aspectes personals
         $exist = Aspecte_personal::find($alumne->id);
 
@@ -129,8 +126,8 @@ class Alumnes extends Controller
             $asP->puntualitat = 0;
             $asP->save();
         }
-        
-        
+
+
         //Pla individualitzat
         //$alumne = Alumne::findOrFail($alumne->id);
         $exist = Pla_individualitzat::find($alumne->alumne_id);
@@ -150,13 +147,13 @@ class Alumnes extends Controller
             $pla->valors = 0;
             $pla->save();
         }
-        
-        
+
+
         //Atenció diversitat
         //$alumne = Alumne::findOrFail($alumne->id);        
         $exist = Atencio_diversitat::find($alumne->id);
 
-        if(!$exist) {
+        if (!$exist) {
             $atencio = new Atencio_diversitat();
             $atencio->alumne_id = $alumne->id;
             $atencio->ed_especial = 0;
@@ -167,17 +164,17 @@ class Alumnes extends Controller
             $atencio->at_individual = 0;
             $atencio->save();
         }
-        
-        
+
+
         //Assignatures        
-        $exist = Alumne_Assignatura::where("alumne_id",$alumne->id)->first();
-        if(!$exist) {        
-       
+        $exist = Alumne_Assignatura::where("alumne_id", $alumne->id)->first();
+        if (!$exist) {
+
             $numAssignatures = count(Assignatura::get());
 
-            for($i=0; $i<$numAssignatures; $i++){
+            for ($i = 0; $i < $numAssignatures; $i++) {
                 $assignatures = new Alumne_Assignatura();
-                $assignatures->assignatura_id = $i+1;
+                $assignatures->assignatura_id = $i + 1;
                 $assignatures->alumne_id = $alumne->id;
                 $assignatures->actitud_1 = 0;
                 $assignatures->actitud_2 = 0;
@@ -202,14 +199,13 @@ class Alumnes extends Controller
                 $assignatures->observacions = '';
                 $assignatures->save();
             }
-        
         }
-        
+
         //Observacions faltes
-        $alumne = Alumne::findOrFail($alumne->id);        
+        $alumne = Alumne::findOrFail($alumne->id);
         $exist = Observacions::find($alumne->id);
-        
-        if(!$exist) {
+
+        if (!$exist) {
             $observacions = new Observacions();
             $observacions->alumne_id = $alumne->id;
             $observacions->faltes = 0;
@@ -219,34 +215,33 @@ class Alumnes extends Controller
             $observacions->dia = '';
             $observacions->save();
         }
-        
-        return redirect('alumnes/llistat')->with('message','Alumne afegit correctament');
-        
-    }  
-    
-    function actualitzarForm($id){
+
+        return redirect('alumnes/llistat')->with('message', 'Alumne afegit correctament');
+    }
+
+    function actualitzarForm($id) {
         $asP = Aspecte_personal::findOrFail($id);
         $pla = Pla_individualitzat::findOrFail($id);
         $atencio = Atencio_diversitat::findOrFail($id);
         $observacions = Observacions::findOrFail($id);
-        $alumneAssignaturaExist = Alumne_Assignatura::where("alumne_id",$id)->firstOrFail();
-        
-        $alumneAssignatura=false;
-        if($alumneAssignaturaExist){
-            $alumneAssignatura = Alumne_Assignatura::where("alumne_id",$id)->get();   
-        }          
+        $alumneAssignaturaExist = Alumne_Assignatura::where("alumne_id", $id)->firstOrFail();
+
+        $alumneAssignatura = false;
+        if ($alumneAssignaturaExist) {
+            $alumneAssignatura = Alumne_Assignatura::where("alumne_id", $id)->get();
+        }
         $assignatures = Assignatura::all();
-               
+
         return view('accions.formulari')
-                ->with('asP',$asP)
-                ->with('pla',$pla)
-                ->with('atencio',$atencio)
-                ->with('observacions',$observacions)
-                ->with('assignatures',$assignatures)
-                ->with('alumneAssignatura',$alumneAssignatura);
+                        ->with('asP', $asP)
+                        ->with('pla', $pla)
+                        ->with('atencio', $atencio)
+                        ->with('observacions', $observacions)
+                        ->with('assignatures', $assignatures)
+                        ->with('alumneAssignatura', $alumneAssignatura);
     }
-    
-    function modificarForm(Request $request){
+
+    function modificarForm(Request $request) {
         $asP = Aspecte_personal::findOrFail($request->id);
 
         ($request->input('motivacio')) ? $asP->motivacio = $request->input('motivacio') : $asP->motivacio = 0;
@@ -262,19 +257,19 @@ class Alumnes extends Controller
 
         $asP->save();
 
-        
+
         $atencio = Atencio_diversitat::findOrFail($request->id);
-        
+
         ($request->input('ed_especial')) ? $atencio->ed_especial = 1 : $atencio->ed_especial = 0;
         ($request->input('acollida')) ? $atencio->acollida = 1 : $atencio->acollida = 0;
         ($request->input('suport_linguistic')) ? $atencio->suport_linguistic = 1 : $atencio->suport_linguistic = 0;
         ($request->input('sep')) ? $atencio->sep = 1 : $atencio->sep = 0;
         ($request->input('vetllador')) ? $atencio->vetllador = 1 : $atencio->vetllador = 0;
         ($request->input('at_individual')) ? $atencio->at_individual = 1 : $atencio->at_individual = 0;
-        
+
         $atencio->save();
-        
-        
+
+
         $pla = Pla_individualitzat::findOrFail($request->id);
 
         ($request->input('llengua')) ? $pla->llengua = 1 : $pla->llengua = 0;
@@ -287,10 +282,10 @@ class Alumnes extends Controller
         ($request->input('ed_fisica')) ? $pla->ed_fisica = 1 : $pla->ed_fisica = 0;
         ($request->input('religio')) ? $pla->religio = 1 : $pla->religio = 0;
         ($request->input('valors')) ? $pla->valors = 1 : $pla->valors = 0;
-        
+
         $pla->save();
-        
-        
+
+
         $observacions = Observacions::findOrFail($request->id);
 
         ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
@@ -298,24 +293,30 @@ class Alumnes extends Controller
         ($request->input('faltesComentaris')) ? $observacions->comentaris = $request->input('faltesComentaris') : $observacions->comentaris = '';
         ($request->input('observacions')) ? $observacions->observacions = $request->input('observacions') : $observacions->observacions = '';
         ($request->input('dia')) ? $observacions->dia = $request->input('dia') : $observacions->dia = '';
-        
-        $observacions->save();
-        
-        $exist = Alumne_Assignatura::where($request->id)->first();
-        if(!$exist) {        
-       
-            $numAssignatures = count(Assignatura::get());
 
-            for($i=0; $i<$numAssignatures; $i++){
-                $assignatures = Alumne_Assignatura::findOrFail($request->id);
-                $assignatures->assignatura_id = $i+1;
-               // $assignatures->alumne_id =  ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
-                $assignatures->actitud_1 = 0;
-                $assignatures->actitud_2 = 0;
-                $assignatures->actitud_3 = 0;
-                $assignatures->esforc_1 = 0;
-                $assignatures->esforc_2 = 0;
-                $assignatures->esforc_3 = 0;
+        $observacions->save();
+
+
+        //Assignatures
+        $exist = Alumne_Assignatura::where("alumne_id", $request->id)->first();
+        if ($exist) {          
+            $numAssignatures = count(Assignatura::get());
+            $id_alumne = $exist->alumne_id;
+
+            //Numero de assignatura
+            $assignatura_id = 1;
+            
+            for ($i = 0; $i < $numAssignatures; $i++) {
+                //$assignatures = Alumne_Assignatura::findOrFail($request->id);
+                //// $assignatures = Alumne_Assignatura::where("alumne_id",$id_alumne->alumne_id)->get();   
+                $assignatures = Alumne_Assignatura::where('assignatura_id', $assignatura_id)->first();
+                $assignatures->alumne_id =  $id_alumne;
+                $assignatures->actitud_1 = ($request->input('actitud1_' . $assignatura_id)) ? $assignatures->actitud_1 = $request->input('actitud1_' . $assignatura_id) : $assignatures->actitud_1 = 0;
+                $assignatures->actitud_2 = ($request->input('actitud2_' . $assignatura_id)) ? $assignatures->actitud_2 = $request->input('actitud2_' . $assignatura_id) : $assignatures->actitud_2 = 0;
+                $assignatures->actitud_3 = ($request->input('actitud3_' . $assignatura_id)) ? $assignatures->actitud_3 = $request->input('actitud3_' . $assignatura_id) : $assignatures->actitud_3 = 0;
+                $assignatures->esforc_1 = ($request->input('esforc1_' . $assignatura_id)) ? $assignatures->esforc_1 = $request->input('esforc1_' . $assignatura_id) : $assignatures->esforc_1 = 0;
+                $assignatures->esforc_2 = ($request->input('esforc2_' . $assignatura_id)) ? $assignatures->esforc_2 = $request->input('esforc2_' . $assignatura_id) : $assignatures->esforc_2 = 0;
+                $assignatures->esforc_3 = ($request->input('esforc3_' . $assignatura_id)) ? $assignatures->esforc_3 = $request->input('esforc3_' . $assignatura_id) : $assignatures->esforc_3 = 0;
                 $assignatures->treball_1 = 0;
                 $assignatures->treball_2 = 0;
                 $assignatures->treball_3 = 0;
@@ -332,12 +333,15 @@ class Alumnes extends Controller
                 $assignatures->comentari_4 = 0;
                 $assignatures->observacions = '';
                 $assignatures->save();
+                
+                //Canviar de assignatura
+                $assignatura_id++;
             }
-        
         }
-        
-        return redirect("alumnes/formulari/".$request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
-    
+
+        return redirect("alumnes/formulari/" . $request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
     }
-    
-}// FINAL DE LA CLASE
+
+}
+
+// FINAL DE LA CLASE
