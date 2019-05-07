@@ -328,7 +328,7 @@
                 @foreach($alumneAssignatura as $alumneAssignatures)
                 <h2><b>{{ $assignatures[$alumneAssignatures->assignatura_id-1]->nom }}</b></h2>
                 <br>
-                
+
                 <table class="table table-bordered">
                     <tr>
                         <th><b>{{ $assignatures[$alumneAssignatures->assignatura_id-1]->nom }}</b></th>
@@ -377,23 +377,58 @@
                         <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->deures_1 }}" name="deures1_{{$alumneAssignatures->assignatura_id}}">
                         </td>
-                         <td>
+                        <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->deures_2 }}" name="deures2_{{$alumneAssignatures->assignatura_id}}">
                         </td>
                         <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->deures_3 }}" name="deures3_{{$alumneAssignatures->assignatura_id}}">
                         </td>
-                    </tr
+                    </tr>
                     <tr>
-                        <td>Qualificació final</td>
+                        <?php $qualifSelect = "Els continguts d'aquesta àrea estan adaptats"; ?>
+                        <td>
+                            <label>Qualificació final</label>
+                            <br>
+                            <select class="form-control" name="adaptats">
+                                <option value=""></option>
+                                <option value="{{$qualifSelect}}">{{$qualifSelect}}</option>
+                            </select>
+                        </td>        
+
+                        <?php $coment = ["Assol EXCEL·LENT ", "Assol NOTABLE", "Assol SATISFACTORI", "NO ASSOLIMENT", ""]; ?>
                         <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->qualificacio_1 }}" name="qualificacio1_{{$alumneAssignatures->assignatura_id}}">
+                            <br>
+                            <select class="form-control" name="comentari1_{{$alumneAssignatures->assignatura_id}}">
+                                @for($i = 0; $i < count($coment); $i++)
+                                <option value='{{$coment[$i]}}'@if(isset($alumneAssignatures) && $coment[$i]==$alumneAssignatures->comentari_1) selected @endif>{{$coment[$i]}}</option>
+                                @endfor                                
+                            </select>
                         </td>
                         <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->qualificacio_2 }}" name="qualificacio2_{{$alumneAssignatures->assignatura_id}}">
+                            <br>
+                            <select class="form-control" name="comentari2_{{$alumneAssignatures->assignatura_id}}">
+                                @for($i = 0; $i < count($coment); $i++)
+                                <option value='{{$coment[$i]}}'@if(isset($alumneAssignatures) && $coment[$i]==$alumneAssignatures->comentari_1) selected @endif>{{$coment[$i]}}</option>
+                                @endfor                                
+                            </select>
                         </td>
                         <td>
                             <input class="form-control" type="number" value="{{ $alumneAssignatures->qualificacio_3 }}" name="qualificacio3_{{$alumneAssignatures->assignatura_id}}">
+                            <br>
+                            <select class="form-control" name="comentari3_{{$alumneAssignatures->assignatura_id}}">
+                                @for($i = 0; $i < count($coment); $i++)
+                                <option value='{{$coment[$i]}}'@if(isset($alumneAssignatures) && $coment[$i]==$alumneAssignatures->comentari_3) selected @endif>{{$coment[$i]}}</option>
+                                @endfor                                
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <label for="observacionsNotes">Observacions</label>
+                            <textarea class="form-control" name="observacionsNotes">@if($observacions){{$alumneAssignatures->observacions}}@endif</textarea>
                         </td>
                     </tr>
                 </table>
