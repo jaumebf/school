@@ -335,21 +335,21 @@
                     <td>
                         <select class="form-control" name="qualificacio1_{{$alumneAssignatures->assignatura_id}}">
                             @for($i = 0; $i < count($coment); $i++)
-                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->comentari_1) selected @endif>{{$coment[$i]}}</option>
+                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->qualificacio_1) selected @endif>{{$coment[$i]}}</option>
                             @endfor                                
                         </select>
                     </td>
                     <td>
                         <select class="form-control" name="qualificacio2_{{$alumneAssignatures->assignatura_id}}">
                             @for($i = 0; $i < count($coment); $i++)
-                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->comentari_1) selected @endif>{{$coment[$i]}}</option>
+                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->qualificacio_2) selected @endif>{{$coment[$i]}}</option>
                             @endfor                                 
                         </select>
                     </td>
                     <td>
                         <select class="form-control" name="qualificacio3_{{$alumneAssignatures->assignatura_id}}">
                             @for($i = 0; $i < count($coment); $i++)
-                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->comentari_1) selected @endif>{{$coment[$i]}}</option>
+                                <option value="{{$i+1}}" @if(isset($alumneAssignatures) && $i+1==$alumneAssignatures->qualificacio_3) selected @endif>{{$coment[$i]}}</option>
                             @endfor                                  
                         </select>
                     </td>
@@ -366,19 +366,17 @@
             @endforeach
         </div>
     <!-- FIN Notes -->
-
-    <!-- Faltes -->
-        <div class="col-md-4">
-            <br>
-            <h1 align='center'>Faltes d'assistència</h1>
-            <br>
-        </div>
-
+    
         <div class="col-md-10">           
             <input type="hidden" name="id" value="{{$pla->id}}">
-
+            
             <div class="form-group">
-
+                <!-- Faltes -->
+                <div>
+                    <br>
+                    <h1 align='center'>Faltes d'assistència</h1>
+                    <br>
+                </div>
                 <?php
                 $arrayNumFaltes = [
                     "Cap",
