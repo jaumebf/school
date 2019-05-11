@@ -176,26 +176,26 @@ class Alumnes extends Controller {
                 $assignatures = new Alumne_Assignatura();
                 $assignatures->assignatura_id = $i + 1;
                 $assignatures->alumne_id = $alumne->id;
-                $assignatures->actitud_1 = 0;
-                $assignatures->actitud_2 = 0;
-                $assignatures->actitud_3 = 0;
-                $assignatures->esforc_1 = 0;
-                $assignatures->esforc_2 = 0;
-                $assignatures->esforc_3 = 0;
-                $assignatures->treball_1 = 0;
-                $assignatures->treball_2 = 0;
-                $assignatures->treball_3 = 0;
-                $assignatures->deures_1 = 0;
-                $assignatures->deures_2 = 0;
-                $assignatures->deures_3 = 0;
-                $assignatures->adaptats = 0;
-                $assignatures->qualificacio_1 = 0;
-                $assignatures->qualificacio_2 = 0;
-                $assignatures->qualificacio_3 = 0;
-                $assignatures->comentari_1 = 0;
-                $assignatures->comentari_2 = 0;
-                $assignatures->comentari_3 = 0;
-                $assignatures->comentari_4 = 0;
+                $assignatures->actitud_1 = 5;
+                $assignatures->actitud_2 = 5;
+                $assignatures->actitud_3 = 5;
+                $assignatures->esforc_1 = 5;
+                $assignatures->esforc_2 = 5;
+                $assignatures->esforc_3 = 5;
+                $assignatures->treball_1 = 5;
+                $assignatures->treball_2 = 5;
+                $assignatures->treball_3 = 5;
+                $assignatures->deures_1 = 5;
+                $assignatures->deures_2 = 5;
+                $assignatures->deures_3 = 5;
+                $assignatures->adaptats = 2;
+                $assignatures->qualificacio_1 = 5;
+                $assignatures->qualificacio_2 = 5;
+                $assignatures->qualificacio_3 = 5;
+                $assignatures->comentari_1 = 5;
+                $assignatures->comentari_2 = 5;
+                $assignatures->comentari_3 = 5;
+                $assignatures->comentari_4 = 5;
                 $assignatures->observacions = '';
                 $assignatures->save();
             }
@@ -212,6 +212,7 @@ class Alumnes extends Controller {
             $observacions->comentaris = 4;
             $observacions->comentaris = '';
             $observacions->observacions = '';
+            $observacions->avaluacio = 4;
             $observacions->dia = '';
             $observacions->save();
         }
@@ -221,6 +222,7 @@ class Alumnes extends Controller {
 
     function actualitzarForm($id) {
         $asP = Aspecte_personal::findOrFail($id);
+        $alumne = Alumne::findOrFail($id);
         $pla = Pla_individualitzat::findOrFail($id);
         $atencio = Atencio_diversitat::findOrFail($id);
         $observacions = Observacions::findOrFail($id);
@@ -238,6 +240,7 @@ class Alumnes extends Controller {
                         ->with('atencio', $atencio)
                         ->with('observacions', $observacions)
                         ->with('assignatures', $assignatures)
+                        ->with('alumne', $alumne)
                         ->with('alumneAssignatura', $alumneAssignatura);
     }
 
@@ -293,6 +296,7 @@ class Alumnes extends Controller {
         ($request->input('faltesComentaris')) ? $observacions->comentaris = $request->input('faltesComentaris') : $observacions->comentaris = '';
         ($request->input('observacions')) ? $observacions->observacions = $request->input('observacions') : $observacions->observacions = '';
         ($request->input('dia')) ? $observacions->dia = $request->input('dia') : $observacions->dia = '';
+        ($request->input('avaluacio')) ? $observacions->avaluacio = $request->input('avaluacio') : $observacions->dia = 4;
 
         $observacions->save();
 

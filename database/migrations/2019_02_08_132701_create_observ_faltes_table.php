@@ -21,6 +21,7 @@ class CreateObservFaltesTable extends Migration
             $table->string('comentaris');
             $table->longText('observacions');
             $table->string('dia');
+            $table->integer('avaluacio');
             $table->timestamps();
         });
     }
