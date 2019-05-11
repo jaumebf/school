@@ -290,14 +290,14 @@ class Alumnes extends Controller {
 
 
         $observacions = Observacions::findOrFail($request->id);
-
+        
         ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
         ($request->input('numFaltesJust')) ? $observacions->numFaltesJust = $request->input('numFaltesJust') : $observacions->numFaltesJust = 4;
         ($request->input('faltesComentaris')) ? $observacions->comentaris = $request->input('faltesComentaris') : $observacions->comentaris = '';
         ($request->input('observacions')) ? $observacions->observacions = $request->input('observacions') : $observacions->observacions = '';
         ($request->input('dia')) ? $observacions->dia = $request->input('dia') : $observacions->dia = '';
         ($request->input('avaluacio')) ? $observacions->avaluacio = $request->input('avaluacio') : $observacions->dia = 4;
-
+        
         $observacions->save();
 
 
