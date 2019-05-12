@@ -39,6 +39,7 @@ Route::get('/alumnes/llistat/', 'Alumnes@llistat');
 //Notes
 Route::get('/alumnes/formulari/{codi}', 'Alumnes@actualitzarForm')->where('codi', '[0-9]+');
 Route::post('/alumnes/formulari/', 'Alumnes@modificarForm');
+Route::post('/alumnes/formulari/pdf', 'Alumnes@exportarForm');
 
 /*Route::get('/alumnes/alta/', 'Alumnes@alta');
 Route::post('/alumnes/afegir/', 'Alumnes@afegirAlumne');

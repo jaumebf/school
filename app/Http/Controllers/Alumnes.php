@@ -10,9 +10,39 @@ use App\Alumne;
 use App\Observacions;
 use App\Assignatura;
 use App\Alumne_Assignatura;
+use setasign\Fpdi\Fpdi;
+
+require_once(base_path() . '/fpdf.php');
 
 class Alumnes extends Controller {
 
+    function exportarForm(Request $request) {
+        $pdf = new Fpdi();
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
+
+        $pdf->setSourceFile(base_path("resources/assets/template.pdf"));
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
+
+        $pdf->SetFont('Arial', 'BI', 10);
+        
+        //Data del curs
+        $pdf->SetXY(37 - strlen($request->input('data')), 34.2);
+        $pdf->Write(5, $request->input('data'));
+        
+        //Avaluació
+        $avaluacio = ["Primera avaluació", "Segona avaluació", "Tercera avaluació", ""];
+        $pdf->SetXY(95 - strlen($avaluacio[$request->input('avaluacio')-1]), 34.2);
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $avaluacio[$request->input('avaluacio')-1]));
+        
+        //Nom i cognom
+        $pdf->SetXY(37 - strlen($request->input('nom')), 50);
+        $pdf->Write(5, $request->input('nom'));
+        
+        $pdf->Output('I', 'example.pdf');
+    }
+    
     public function __construct() {
         $this->middleware('auth');
     }
@@ -290,54 +320,54 @@ class Alumnes extends Controller {
 
 
         $observacions = Observacions::findOrFail($request->id);
-        
+
         ($request->input('faltes')) ? $observacions->faltes = $request->input('faltes') : $observacions->faltes = 0;
         ($request->input('numFaltesJust')) ? $observacions->numFaltesJust = $request->input('numFaltesJust') : $observacions->numFaltesJust = 4;
         ($request->input('faltesComentaris')) ? $observacions->comentaris = $request->input('faltesComentaris') : $observacions->comentaris = '';
         ($request->input('observacions')) ? $observacions->observacions = $request->input('observacions') : $observacions->observacions = '';
         ($request->input('dia')) ? $observacions->dia = $request->input('dia') : $observacions->dia = '';
         ($request->input('avaluacio')) ? $observacions->avaluacio = $request->input('avaluacio') : $observacions->dia = 4;
-        
+
         $observacions->save();
 
 
         //Assignatures
         $exist = Alumne_Assignatura::where("alumne_id", $request->id)->first();
-        if ($exist) {          
+        if ($exist) {
             $numAssignatures = count(Assignatura::get());
             $id_alumne = $exist->alumne_id;
 
             //Numero de assignatura
             $assignatura_id = 1;
-            
+
             for ($i = 0; $i < $numAssignatures; $i++) {
                 //$assignatures = Alumne_Assignatura::findOrFail($request->id);
                 //// $assignatures = Alumne_Assignatura::where("alumne_id",$id_alumne->alumne_id)->get();   
                 $assignatures = Alumne_Assignatura::where('assignatura_id', $assignatura_id)->first();
-                $assignatures->alumne_id =  $id_alumne;
-                $assignatures->actitud_1 =  ($request->input('actitud_1_' . $assignatura_id)) ? $assignatures->actitud_1 = $request->input('actitud_1_' . $assignatura_id) : $assignatures->actitud_1 = 5;
-                $assignatures->actitud_2 =  ($request->input('actitud_2_' . $assignatura_id)) ? $assignatures->actitud_2 = $request->input('actitud_2_' . $assignatura_id) : $assignatures->actitud_2 = 5;
-                $assignatures->actitud_3 =  ($request->input('actitud_3_' . $assignatura_id)) ? $assignatures->actitud_3 = $request->input('actitud_3_' . $assignatura_id) : $assignatures->actitud_3 = 5;
-                $assignatures->esforc_1 =   ($request->input('esforc_1_' . $assignatura_id)) ? $assignatures->esforc_1 = $request->input('esforc_1_' . $assignatura_id) : $assignatures->esforc_1 = 5;
-                $assignatures->esforc_2 =   ($request->input('esforc_2_' . $assignatura_id)) ? $assignatures->esforc_2 = $request->input('esforc_2_' . $assignatura_id) : $assignatures->esforc_2 = 5;
-                $assignatures->esforc_3 =   ($request->input('esforc_3_' . $assignatura_id)) ? $assignatures->esforc_3 = $request->input('esforc_3_' . $assignatura_id) : $assignatures->esforc_3 = 5;
-                $assignatures->treball_1 =  ($request->input('treball_1_' . $assignatura_id)) ? $assignatures->treball_1 = $request->input('treball_1_' . $assignatura_id) : $assignatures->treball_1 = 5;
-                $assignatures->treball_2 =  ($request->input('treball_2_' . $assignatura_id)) ? $assignatures->treball_2 = $request->input('treball_2_' . $assignatura_id) : $assignatures->treball_2 = 5;
-                $assignatures->treball_3 =  ($request->input('treball_3_' . $assignatura_id)) ? $assignatures->treball_3 = $request->input('treball_3_' . $assignatura_id) : $assignatures->treball_3 = 5;
-                $assignatures->deures_1 =   ($request->input('deures_1_' . $assignatura_id)) ? $assignatures->deures_1 = $request->input('deures_1_' . $assignatura_id) : $assignatures->deures_1 = 5;
-                $assignatures->deures_2 =   ($request->input('deures_2_' . $assignatura_id)) ? $assignatures->deures_2 = $request->input('deures_2_' . $assignatura_id) : $assignatures->deures_2 = 5;
-                $assignatures->deures_3 =   ($request->input('deures_3_' . $assignatura_id)) ? $assignatures->deures_3 = $request->input('deures_3_' . $assignatura_id) : $assignatures->deures_3 = 5;
-                $assignatures->adaptats =   ($request->input('adaptats_' . $assignatura_id)) ? $assignatures->adaptats = $request->input('adaptats_' . $assignatura_id) : $assignatures->adaptats = 2;
+                $assignatures->alumne_id = $id_alumne;
+                $assignatures->actitud_1 = ($request->input('actitud_1_' . $assignatura_id)) ? $assignatures->actitud_1 = $request->input('actitud_1_' . $assignatura_id) : $assignatures->actitud_1 = 5;
+                $assignatures->actitud_2 = ($request->input('actitud_2_' . $assignatura_id)) ? $assignatures->actitud_2 = $request->input('actitud_2_' . $assignatura_id) : $assignatures->actitud_2 = 5;
+                $assignatures->actitud_3 = ($request->input('actitud_3_' . $assignatura_id)) ? $assignatures->actitud_3 = $request->input('actitud_3_' . $assignatura_id) : $assignatures->actitud_3 = 5;
+                $assignatures->esforc_1 = ($request->input('esforc_1_' . $assignatura_id)) ? $assignatures->esforc_1 = $request->input('esforc_1_' . $assignatura_id) : $assignatures->esforc_1 = 5;
+                $assignatures->esforc_2 = ($request->input('esforc_2_' . $assignatura_id)) ? $assignatures->esforc_2 = $request->input('esforc_2_' . $assignatura_id) : $assignatures->esforc_2 = 5;
+                $assignatures->esforc_3 = ($request->input('esforc_3_' . $assignatura_id)) ? $assignatures->esforc_3 = $request->input('esforc_3_' . $assignatura_id) : $assignatures->esforc_3 = 5;
+                $assignatures->treball_1 = ($request->input('treball_1_' . $assignatura_id)) ? $assignatures->treball_1 = $request->input('treball_1_' . $assignatura_id) : $assignatures->treball_1 = 5;
+                $assignatures->treball_2 = ($request->input('treball_2_' . $assignatura_id)) ? $assignatures->treball_2 = $request->input('treball_2_' . $assignatura_id) : $assignatures->treball_2 = 5;
+                $assignatures->treball_3 = ($request->input('treball_3_' . $assignatura_id)) ? $assignatures->treball_3 = $request->input('treball_3_' . $assignatura_id) : $assignatures->treball_3 = 5;
+                $assignatures->deures_1 = ($request->input('deures_1_' . $assignatura_id)) ? $assignatures->deures_1 = $request->input('deures_1_' . $assignatura_id) : $assignatures->deures_1 = 5;
+                $assignatures->deures_2 = ($request->input('deures_2_' . $assignatura_id)) ? $assignatures->deures_2 = $request->input('deures_2_' . $assignatura_id) : $assignatures->deures_2 = 5;
+                $assignatures->deures_3 = ($request->input('deures_3_' . $assignatura_id)) ? $assignatures->deures_3 = $request->input('deures_3_' . $assignatura_id) : $assignatures->deures_3 = 5;
+                $assignatures->adaptats = ($request->input('adaptats_' . $assignatura_id)) ? $assignatures->adaptats = $request->input('adaptats_' . $assignatura_id) : $assignatures->adaptats = 2;
                 $assignatures->qualificacio_1 = ($request->input('qualificacio_1_' . $assignatura_id)) ? $assignatures->qualificacio_1 = $request->input('qualificacio_1_' . $assignatura_id) : $assignatures->qualificacio_1 = 5;
                 $assignatures->qualificacio_2 = ($request->input('qualificacio_2_' . $assignatura_id)) ? $assignatures->qualificacio_2 = $request->input('qualificacio_2_' . $assignatura_id) : $assignatures->qualificacio_2 = 5;
                 $assignatures->qualificacio_3 = ($request->input('qualificacio_3_' . $assignatura_id)) ? $assignatures->qualificacio_3 = $request->input('qualificacio_3_' . $assignatura_id) : $assignatures->qualificacio_3 = 5;
                 $assignatures->comentari_1 = ($request->input('comentari_1_' . $assignatura_id)) ? $assignatures->comentari_1 = $request->input('comentari_1_' . $assignatura_id) : $assignatures->comentari_1 = 5;
                 $assignatures->comentari_2 = ($request->input('comentari_2_' . $assignatura_id)) ? $assignatures->comentari_2 = $request->input('comentari_2_' . $assignatura_id) : $assignatures->comentari_2 = 5;
                 $assignatures->comentari_3 = ($request->input('comentari_3_' . $assignatura_id)) ? $assignatures->comentari_3 = $request->input('comentari_3_' . $assignatura_id) : $assignatures->comentari_3 = 5;
-                $assignatures->comentari_4 = ($request->input('comentari_4_' . $assignatura_id)) ? $assignatures->comentari_4 = $request->input('comentari_4_' . $assignatura_id) : $assignatures->comentari_4 = 5;                
+                $assignatures->comentari_4 = ($request->input('comentari_4_' . $assignatura_id)) ? $assignatures->comentari_4 = $request->input('comentari_4_' . $assignatura_id) : $assignatures->comentari_4 = 5;
                 $assignatures->observacions = ($request->input('observacionsNotes_' . $assignatura_id)) ? $assignatures->observacions = $request->input('observacionsNotes_' . $assignatura_id) : $assignatures->observacions = '';
                 $assignatures->save();
-                
+
                 //Canviar de assignatura
                 $assignatura_id++;
             }
@@ -345,6 +375,8 @@ class Alumnes extends Controller {
 
         return redirect("alumnes/formulari/" . $request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
     }
+
+
 
 }
 
