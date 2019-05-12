@@ -40,19 +40,18 @@
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                            </li>
+                            </li>                           
                         <?php else: ?>
                         
                         <li class="nav-item">
                             <a href="<?php echo e(url('/alumnes/llistat')); ?>" class="nav-link">Alumnes</a>
                         </li>
                         
-                        <li class="nav-item">
-                            <a href="<?php echo e(url('/usuaris/llistat')); ?>" class="nav-link">Professors</a>
-                        </li>
+                        <?php if(AUTH::user()->role != 1): ?>
+                            <li class="nav-item">
+                                <a href="<?php echo e(url('/usuaris/llistat')); ?>" class="nav-link">Professors</a>
+                            </li>
+                        <?php endif; ?>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

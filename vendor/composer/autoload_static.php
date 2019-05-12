@@ -323,12 +323,23 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
         ),
+        'A' => 
+        array (
+            'Anouar\\Fpdf' => 
+            array (
+                0 => __DIR__ . '/..' . '/anouar/fpdf/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
         'AlumnesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AlumnesTableSeeder.php',
         'AmbitTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AmbitTableSeeder.php',
+        'Anouar\\Fpdf\\Facades\\Fpdf' => __DIR__ . '/..' . '/anouar/fpdf/src/Anouar/Fpdf/Facades/Fpdf.php',
+        'Anouar\\Fpdf\\Fpdf' => __DIR__ . '/..' . '/anouar/fpdf/src/Anouar/Fpdf/Fpdf.php',
+        'Anouar\\Fpdf\\FpdfServiceProvider' => __DIR__ . '/..' . '/anouar/fpdf/src/Anouar/Fpdf/FpdfServiceProvider.php',
         'App\\Alumne' => __DIR__ . '/../..' . '/app/Alumne.php',
+        'App\\Alumne_Assignatura' => __DIR__ . '/../..' . '/app/Alumne_Assignatura.php',
         'App\\Aspecte_personal' => __DIR__ . '/../..' . '/app/Aspecte_personal.php',
         'App\\Assignatura' => __DIR__ . '/../..' . '/app/Assignatura.php',
         'App\\Atencio_diversitat' => __DIR__ . '/../..' . '/app/Atencio_diversitat.php',
@@ -345,6 +356,7 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\PlaIndividualitzat' => __DIR__ . '/../..' . '/app/Http/Controllers/PlaIndividualitzat.php',
+        'App\\Http\\Controllers\\usuarisController' => __DIR__ . '/../..' . '/app/Http/Controllers/usuarisController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -352,6 +364,7 @@ class ComposerStaticInitc73507a76ce3f44630c39033a96af9b7
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\isAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/isAdmin.php',
         'App\\Mesures_atencio' => __DIR__ . '/../..' . '/app/Mesures_atencio.php',
         'App\\Observacions' => __DIR__ . '/../..' . '/app/Observacions.php',
         'App\\Pla_individualitzat' => __DIR__ . '/../..' . '/app/Pla_individualitzat.php',
