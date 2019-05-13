@@ -49,7 +49,7 @@
             <div class="form-group" name="curs">
                 <label for="curs" class="col-sm-2 col-form-label col-form-label-sm">Curs</label>               
                 <input type="number" name="curs" value="{{$alumne->course}}" class="form-control">
-                @if($errors->has('cognom'))                  
+                @if($errors->has('curs'))                  
                 <strong>{{ $errors->first('curs') }}</strong>                  
                 @endif   
             </div>

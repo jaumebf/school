@@ -47,7 +47,7 @@
                             <a href="{{ url('/alumnes/llistat') }}" class="nav-link">Alumnes</a>
                         </li>
                         
-                        @if(AUTH::user()->role != 1)
+                        @if(AUTH::user()->role == 0)
                             <li class="nav-item">
                                 <a href="{{ url('/usuaris/llistat') }}" class="nav-link">Professors</a>
                             </li>
@@ -59,11 +59,7 @@
                                 </a>
                                                                                              
                                                                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">
-                                     Configuració
-                                    </a>
-                                    
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">                                   
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -28,6 +28,12 @@
     <div class="col-md-10">
         <br>
         <h1 align='center'>Llista d'usuaris</h1>
+        
+        <div class="form-group {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password">
+        @if($errors->has('password'))                  
+            <strong>{{ $errors->first('password') }}</strong>                  
+        @endif    
+        </div>
         <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -46,7 +52,7 @@
                         <form method="POST" action="{{url('/usuaris/llistat')}}">
                             @csrf
                             <input type="hidden" name="id" value="{{$usu->id}}">
-                            <input type="password" name="password"> <input type="submit" value="Canviar" class="btn btn-info">
+                            <input type="password" name="password"> <input type="submit" value="Canviar" class="btn btn-info">                           
                         </form>
                     </td>
 

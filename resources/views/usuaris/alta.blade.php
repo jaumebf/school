@@ -21,7 +21,7 @@
             <div class="form-group {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name">
                 <label for="name" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>               
                 <input type="text" name="name" value="{{old('name')}}" class="form-control">                 
-                @if($errors->has('nom'))                  
+                @if($errors->has('name'))                  
                 <strong>{{ $errors->first('name') }}</strong>                  
                 @endif    
             </div>

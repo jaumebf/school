@@ -28,7 +28,7 @@ Route::middleware(['isAdmin'])->group(function() {
     Route::get('/usuaris/llistat', 'usuarisController@llistarUsuaris');
     Route::get('/usuaris/alta', 'usuarisController@altaUsuari');
     Route::post('/usuaris/alta', 'usuarisController@afegirUsuari');
-    Route::post('/usuaris/', 'usuarisController@canviarPassword');
+    Route::post('/usuaris/llistat', 'usuarisController@canviarPassword');
     Route::get('/usuaris/canviarRol/{codi}', 'usuarisController@canviarRol')->where('codi', '[0-9]+');
     Route::get('/usuaris/esborrar/{codi}', 'usuarisController@esborrarUsuari')->where('codi', '[0-9]+');    
 });
