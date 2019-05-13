@@ -1,27 +1,26 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-@if(AUTH::user()->role != 1)
+<?php if(AUTH::user()->role != 1): ?>
 <ul class="nav justify-content-center"> 
     <li class="nav-item">
-        <a class="nav-link active" href="{{ url("alumnes/alta") }}">Afegir alumne</a>
+        <a class="nav-link active" href="<?php echo e(url("alumnes/alta")); ?>">Afegir alumne</a>
     </li>
 </ul>
-@endif
+<?php endif; ?>
 <div class="row justify-content-center">
     <div class="col-md-9">
-        @if (session('message'))
+        <?php if(session('message')): ?>
         <div class="alert alert-success">
-            {{ session('message') }}
+            <?php echo e(session('message')); ?>
+
         </div>
-        @endif
+        <?php endif; ?>
     </div>
     
     <div class="col-md-9">
         <br>
-        <form method="POST" action="{{url('filtratge/')}}">
-            @csrf
+        <form method="POST" action="<?php echo e(url('filtratge/')); ?>">
+            <?php echo csrf_field(); ?>
             <br>
             <label for="course">Curs</label>
             <select name="course">
@@ -71,27 +70,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($alumnes as $alumne)
+                <?php $__currentLoopData = $alumnes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alumne): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td>{{$alumne->name}}</td>
-                    <td>{{$alumne->surname}}</td>
-                    <td>{{$alumne->dni}}</td>        
-                    <td>{{$alumne->course}}</td>        
-                    <td>{{$alumne->class}}</td>        
-                    <td>{{$alumne->dob}}</td>
-                    @if(AUTH::user()->role != 1)
-                    <td><a href="{{url("alumnes/actualitzar",$alumne->id)}}">Actualitzar</a></td>
-                    <td><a href="{{url("alumnes/esborrar",$alumne->id)}}">Esborrar</a></td>
-                    @endif
-                    <td><a href="{{url("alumnes/formulari",$alumne->id)}}">Notes</a></td>
+                    <td><?php echo e($alumne->name); ?></td>
+                    <td><?php echo e($alumne->surname); ?></td>
+                    <td><?php echo e($alumne->dni); ?></td>        
+                    <td><?php echo e($alumne->course); ?></td>        
+                    <td><?php echo e($alumne->class); ?></td>        
+                    <td><?php echo e($alumne->dob); ?></td>
+                    <?php if(AUTH::user()->role != 1): ?>
+                    <td><a href="<?php echo e(url("alumnes/actualitzar",$alumne->id)); ?>">Actualitzar</a></td>
+                    <td><a href="<?php echo e(url("alumnes/esborrar",$alumne->id)); ?>">Esborrar</a></td>
+                    <?php endif; ?>
+                    <td><a href="<?php echo e(url("alumnes/formulari",$alumne->id)); ?>">Notes</a></td>
                 </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
 
         <div class="row justify-content-center">
             <ul class="pagination">
-                {{$alumnes->links()}}
+                <?php echo e($alumnes->links()); ?>
+
             </ul>
         </div>
     </div>
@@ -112,4 +112,5 @@ $(document).ready(function () {
     </script>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

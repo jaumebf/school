@@ -615,6 +615,55 @@ class Alumnes extends Controller {
 
         return redirect("alumnes/formulari/" . $request->id)->with('message', 'Notes de l\'alumne/a actualitzades correctament');
     }
+    
+    public function filtre(Request $request){
+        $request ->validate([
+            'name' => 'max:100',
+            'surname' => 'max:200',
+            'class' => 'max:3',
+            'course' => 'nullable|numeric',
+        ]);
+
+        session(['name'=> $request->name]);
+        session(['surname'=> $request->surname]);
+        session(['class'=> $request->class]);
+        session(['course'=> $request->course]);      
+       
+        return redirect('/alumnes/filtrats/')
+            ->with('status','Filtres assignats');
+       
+    }
+   
+    public function llistatNormal(){      
+        $filtres['course'] = (int) session("course","");
+        $filtres['name'] = session("name","");
+        $filtres['surname'] = session("surname","");
+        $filtres['class'] = session("class","");
+                      
+        $query = Alumne::query();
+       
+        if($filtres['course'] != ""){
+            $query->where('course', $filtres['course']);         
+        }
+       
+        if($filtres['name'] != ""){
+            $query->where('name','like' , '%'.$filtres['name'].'%' );         
+        }
+       
+        if($filtres['surname'] != ""){
+            $query->where('surname','like' , '%'.$filtres['surname'].'%' );         
+        }
+       
+        if($filtres['class'] != ""){
+            $query->where('class','like' , '%'.$filtres['class'].'%' );         
+        }
+               
+        $llistat = $query->paginate(12);
+       
+        return view('alumnes.llistat')->with('alumnes', $llistat);
+    }
+
+
 
 
 

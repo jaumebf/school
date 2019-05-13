@@ -35,6 +35,8 @@ Route::middleware(['isAdmin'])->group(function() {
 
 //Alumnes
 Route::get('/alumnes/llistat/', 'Alumnes@llistat');
+Route::post('/filtratge','Alumnes@filtre');
+Route::get('/alumnes/filtrats/','Alumnes@llistatNormal');
 
 //Notes
 Route::get('/alumnes/formulari/{codi}', 'Alumnes@actualitzarForm')->where('codi', '[0-9]+');
