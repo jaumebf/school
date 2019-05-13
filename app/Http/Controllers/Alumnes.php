@@ -27,6 +27,7 @@ class Alumnes extends Controller {
 
         $pdf->SetFont('Arial', 'BI', 10);
         
+        /* DADES GENERALS */
         //Data del curs
         $pdf->SetXY(37 - strlen($request->input('data')), 34.2);
         $pdf->Write(5, $request->input('data'));
@@ -37,8 +38,179 @@ class Alumnes extends Controller {
         $pdf->Write(5, iconv('UTF-8', 'windows-1252', $avaluacio[$request->input('avaluacio')-1]));
         
         //Nom i cognom
-        $pdf->SetXY(37 - strlen($request->input('nom')), 50);
+        $pdf->SetXY(44.2 - strlen($request->input('nom')), 43.62);
         $pdf->Write(5, $request->input('nom'));
+        
+        //Nivell
+        $pdf->SetXY(30.2 - strlen($request->input('nivell')), 53.1);
+        $pdf->Write(5, $request->input('nivell'));
+        
+        //Classe
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY(50 - strlen($request->input('classe')), 53.1);
+        $pdf->Write(5, $request->input('nivell') . $request->input('classe'));
+
+        
+        /* ASPECTES PERSONALS */
+        $pdf->SetFont('Arial', '', 15.5);
+        $x = [133.8, 143.8, 153.8, 163.8, 173.8];
+        
+        //Motivació
+        if ($request->input('motivacio') != 0){
+            $pdf->SetXY($x[$request->input('motivacio')-1], 84.5);
+            $pdf->Write(5,"X");
+        }        
+        //Concentració
+        if ($request->input('concentracio') != 0){
+            $pdf->SetXY($x[$request->input('concentracio')-1], 89.5);
+            $pdf->Write(5,"X");
+        }       
+        //Agenda
+        if ($request->input('agenda') != 0){
+            $pdf->SetXY($x[$request->input('agenda')-1], 94.5);
+            $pdf->Write(5,"X");
+        }   
+        //Relació
+        if ($request->input('relacio') != 0){
+            $pdf->SetXY($x[$request->input('relacio')-1], 99.45);
+            $pdf->Write(5,"X");
+        }   
+        //Participació
+        if ($request->input('participacio') != 0){
+            $pdf->SetXY($x[$request->input('participacio')-1], 104.4);
+            $pdf->Write(5,"X");
+        }   
+        //Relació professor
+        if ($request->input('relacioprofesor') != 0){
+            $pdf->SetXY($x[$request->input('relacioprofesor')-1], 109.35);
+            $pdf->Write(5,"X");
+        }   
+        //Emocions
+        if ($request->input('emocions') != 0){
+            $pdf->SetXY($x[$request->input('emocions')-1], 114.25);
+            $pdf->Write(5,"X");
+        }   
+        //Normes
+        if ($request->input('normes') != 0){
+            $pdf->SetXY($x[$request->input('normes')-1], 119.15);
+            $pdf->Write(5,"X");
+        }   
+        //Comportament
+        if ($request->input('comportament') != 0){
+            $pdf->SetXY($x[$request->input('comportament')-1], 124.05);
+            $pdf->Write(5,"X");
+        }   
+        //Puntualitat
+        if ($request->input('puntualitat') != 0){
+            $pdf->SetXY($x[$request->input('puntualitat')-1], 128.95);
+            $pdf->Write(5,"X");
+        } 
+        
+        
+        /* MESURES D'ATENCIÓ DIVERSITAT */
+        //Cap mesura
+        if(null == $request->input('ed_especial') && null == $request->input('acollida') && null == $request->input('suport_linguistic') &&
+            null == $request->input('sep') && null == $request->input('vetllador') && null == $request->input('ed_especial')){
+            $pdf->SetXY(60, 146);
+            $pdf->Write(5,"X");
+        }
+        //Ed. especial
+        if (null != $request->input('ed_especial')){
+            $pdf->SetXY(69.2, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Acollida
+        if (null != $request->input('acollida')){
+            $pdf->SetXY(69.2, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Suport lingüístic
+        if (null != $request->input('suport_linguistic')){
+            $pdf->SetXY(69.2, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //SEP
+        if (null != $request->input('sep')){
+            $pdf->SetXY(69.2, 171);
+            $pdf->Write(5,"X");
+        }
+        //Vetllador
+        if (null != $request->input('vetllador')){
+            $pdf->SetXY(69.2, 175.8);
+            $pdf->Write(5,"X");
+        }
+        //Ed. especial
+        if (null != $request->input('ed_especial')){
+            $pdf->SetXY(69.2, 180.52);
+            $pdf->Write(5,"X");
+        }
+        
+        /* PLA INDIVUALITZAT */
+        //Cap àrea
+        if(null == $request->input('llengua') && null == $request->input('llengua_castellana') && null == $request->input('llengua_inglesa') &&
+            null == $request->input('matematiques') && null == $request->input('cm_natural') && null == $request->input('cm_social') &&
+            null == $request->input('ed_artistica') && null == $request->input('ed_fisica') && null == $request->input('religio') &&
+            null == $request->input('valors')){
+            $pdf->SetXY(141.9, 146);
+            $pdf->Write(5,"X");
+        }
+        //FILA 1
+        //Llengua
+        if (null != $request->input('llengua')){
+            $pdf->SetXY(112.9, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Llengua castellana
+        if (null != $request->input('llengua_castellana')){
+            $pdf->SetXY(112.9, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Llengua anglesa
+        if (null != $request->input('llengua_inglesa')){
+            $pdf->SetXY(112.9, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //Matemàtiques
+        if (null != $request->input('matematiques')){
+            $pdf->SetXY(112.9, 171);
+            $pdf->Write(5,"X");
+        }
+        //CM Natural
+        if (null != $request->input('cm_natural')){
+            $pdf->SetXY(112.9, 175.8);
+            $pdf->Write(5,"X");
+        }
+        //FILA 2
+        //CM Social
+        if (null != $request->input('cm_social')){
+            $pdf->SetXY(165.9, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Ed. artística
+        if (null != $request->input('ed_artistica')){
+            $pdf->SetXY(165.9, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Ed. física
+        if (null != $request->input('ed_fisica')){
+            $pdf->SetXY(165.9, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //Religió
+        if (null != $request->input('religio')){
+            $pdf->SetXY(165.9, 171);
+            $pdf->Write(5,"X");
+        }
+        //Valors
+        if (null != $request->input('valors')){
+            $pdf->SetXY(165.9, 175.8);
+            $pdf->Write(5,"X");
+        }
+        
+        
+        /* LLENGUA CATALANA */
+        
+        
         
         $pdf->Output('I', 'example.pdf');
     }
