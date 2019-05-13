@@ -39,7 +39,7 @@ class Alumnes extends Controller {
         
         //Nom i cognom
         $pdf->SetXY(44.2 - strlen($request->input('nom')), 43.62);
-        $pdf->Write(5, $request->input('nom'));
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('nom')));
         
         //Nivell
         $pdf->SetXY(30.2 - strlen($request->input('nivell')), 53.1);
@@ -208,8 +208,76 @@ class Alumnes extends Controller {
         }
         
         
-        /* LLENGUA CATALANA */
+        $notes = ["Sempre", "Quasi sempre", "A vegades", "Mai", ""];
+        $coment = ["Assol EXCEL·LENT", "Assol NOTABLE", "Assol SATISFACTORI", "NO ASSOLIMENT", ""];
+        $qualifSelect = ["Els continguts d'aquesta àrea estan adaptats", ""];
+        $comentaris = ["Té dificultats en l'expressió oral", "Té dificultats en l'expressió escrita", "Té dificultats en la comprensió lectora", "Té dificultats a l'hora d'escriure", ""];
         
+        $i = 1;
+        /* LLENGUA CATALANA */
+        //for ($i=1; $i<10; $i++){
+            $pdf->SetFont('Arial', '', 10);
+            //Actitud 1
+            if ($request->input('actitud_1_' . $i) != 5){
+                $pdf->SetXY(98 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 200);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+            }
+            //Actitud 2
+            if ($request->input('actitud_2_' . $i) != 5){
+                $pdf->SetXY(137.8 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 200);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+            }
+            //Actitud 3
+            if ($request->input('actitud_3_' . $i) != 5){
+                $pdf->SetXY(174.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 200);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+            }
+            //Esforç 1
+            if ($request->input('esforc_1_' . $i) != 5){
+                $pdf->SetXY(98 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 205);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+            }
+            //Esforç 2
+            if ($request->input('esforc_2_' . $i) != 5){
+                $pdf->SetXY(137.8 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 205);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+            }
+            //Esforç 3
+            if ($request->input('esforc_3_' . $i) != 5){
+                $pdf->SetXY(174.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 205);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+            }
+            //Treball 1
+            if ($request->input('treball_1_' . $i) != 5){
+                $pdf->SetXY(98 - strlen($notes[$request->input('treball_1_' . $i)-1]), 209.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+            }
+            //Treball 2
+            if ($request->input('esforc_2_' . $i) != 5){
+                $pdf->SetXY(137.8 - strlen($notes[$request->input('treball_2_' . $i)-1]), 209.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+            }
+            //Treball 3
+            if ($request->input('treball_3_' . $i) != 5){
+                $pdf->SetXY(174.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 209.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+            }
+            //Treball 1
+            if ($request->input('deures_1_' . $i) != 5){
+                $pdf->SetXY(98 - strlen($notes[$request->input('deures_1_' . $i)-1]), 214.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+            }
+            //Treball 2
+            if ($request->input('deures_2_' . $i) != 5){
+                $pdf->SetXY(137.8 - strlen($notes[$request->input('deures_2_' . $i)-1]), 214.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+            }
+            //Treball 3
+            if ($request->input('deures_3_' . $i) != 5){
+                $pdf->SetXY(174.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 214.9);
+                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+            }
+        //}
         
         
         $pdf->Output('I', 'example.pdf');
