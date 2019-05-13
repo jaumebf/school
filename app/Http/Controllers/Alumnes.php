@@ -14,275 +14,7 @@ use setasign\Fpdi\Fpdi;
 
 require_once(base_path() . '/fpdf.php');
 
-class Alumnes extends Controller {
-
-    function exportarForm(Request $request) {
-        $pdf = new Fpdi();
-        $pdf->AddPage('P');
-        $pdf->SetMargins(0, 0, 0, 0);
-
-        $pdf->setSourceFile(base_path("resources/assets/template.pdf"));
-        $tplIdx = $pdf->importPage(1);
-        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
-
-        $pdf->SetFont('Arial', 'BI', 10);
-        
-        /* DADES GENERALS */
-        //Data del curs
-        $pdf->SetXY(37 - strlen($request->input('data')), 34.2);
-        $pdf->Write(5, $request->input('data'));
-        
-        //Avaluació
-        $avaluacio = ["Primera avaluació", "Segona avaluació", "Tercera avaluació", ""];
-        $pdf->SetXY(95 - strlen($avaluacio[$request->input('avaluacio')-1]), 34.2);
-        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $avaluacio[$request->input('avaluacio')-1]));
-        
-        //Nom i cognom
-        $pdf->SetXY(44.2 - strlen($request->input('nom')), 43.62);
-        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('nom')));
-        
-        //Nivell
-        $pdf->SetXY(30.2 - strlen($request->input('nivell')), 53.1);
-        $pdf->Write(5, $request->input('nivell'));
-        
-        //Classe
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(50 - strlen($request->input('classe')), 53.1);
-        $pdf->Write(5, $request->input('nivell') . $request->input('classe'));
-
-        
-        /* ASPECTES PERSONALS */
-        $pdf->SetFont('Arial', '', 15.5);
-        $x = [133.8, 143.8, 153.8, 163.8, 173.8];
-        
-        //Motivació
-        if ($request->input('motivacio') != 0){
-            $pdf->SetXY($x[$request->input('motivacio')-1], 84.5);
-            $pdf->Write(5,"X");
-        }        
-        //Concentració
-        if ($request->input('concentracio') != 0){
-            $pdf->SetXY($x[$request->input('concentracio')-1], 89.5);
-            $pdf->Write(5,"X");
-        }       
-        //Agenda
-        if ($request->input('agenda') != 0){
-            $pdf->SetXY($x[$request->input('agenda')-1], 94.5);
-            $pdf->Write(5,"X");
-        }   
-        //Relació
-        if ($request->input('relacio') != 0){
-            $pdf->SetXY($x[$request->input('relacio')-1], 99.45);
-            $pdf->Write(5,"X");
-        }   
-        //Participació
-        if ($request->input('participacio') != 0){
-            $pdf->SetXY($x[$request->input('participacio')-1], 104.4);
-            $pdf->Write(5,"X");
-        }   
-        //Relació professor
-        if ($request->input('relacioprofesor') != 0){
-            $pdf->SetXY($x[$request->input('relacioprofesor')-1], 109.35);
-            $pdf->Write(5,"X");
-        }   
-        //Emocions
-        if ($request->input('emocions') != 0){
-            $pdf->SetXY($x[$request->input('emocions')-1], 114.25);
-            $pdf->Write(5,"X");
-        }   
-        //Normes
-        if ($request->input('normes') != 0){
-            $pdf->SetXY($x[$request->input('normes')-1], 119.15);
-            $pdf->Write(5,"X");
-        }   
-        //Comportament
-        if ($request->input('comportament') != 0){
-            $pdf->SetXY($x[$request->input('comportament')-1], 124.05);
-            $pdf->Write(5,"X");
-        }   
-        //Puntualitat
-        if ($request->input('puntualitat') != 0){
-            $pdf->SetXY($x[$request->input('puntualitat')-1], 128.95);
-            $pdf->Write(5,"X");
-        } 
-        
-        
-        /* MESURES D'ATENCIÓ DIVERSITAT */
-        //Cap mesura
-        if(null == $request->input('ed_especial') && null == $request->input('acollida') && null == $request->input('suport_linguistic') &&
-            null == $request->input('sep') && null == $request->input('vetllador') && null == $request->input('ed_especial')){
-            $pdf->SetXY(60, 146);
-            $pdf->Write(5,"X");
-        }
-        //Ed. especial
-        if (null != $request->input('ed_especial')){
-            $pdf->SetXY(69.2, 156.7);
-            $pdf->Write(5,"X");
-        }
-        //Acollida
-        if (null != $request->input('acollida')){
-            $pdf->SetXY(69.2, 161.5);
-            $pdf->Write(5,"X");
-        }
-        //Suport lingüístic
-        if (null != $request->input('suport_linguistic')){
-            $pdf->SetXY(69.2, 166.3);
-            $pdf->Write(5,"X");
-        }
-        //SEP
-        if (null != $request->input('sep')){
-            $pdf->SetXY(69.2, 171);
-            $pdf->Write(5,"X");
-        }
-        //Vetllador
-        if (null != $request->input('vetllador')){
-            $pdf->SetXY(69.2, 175.8);
-            $pdf->Write(5,"X");
-        }
-        //Ed. especial
-        if (null != $request->input('ed_especial')){
-            $pdf->SetXY(69.2, 180.52);
-            $pdf->Write(5,"X");
-        }
-        
-        /* PLA INDIVUALITZAT */
-        //Cap àrea
-        if(null == $request->input('llengua') && null == $request->input('llengua_castellana') && null == $request->input('llengua_inglesa') &&
-            null == $request->input('matematiques') && null == $request->input('cm_natural') && null == $request->input('cm_social') &&
-            null == $request->input('ed_artistica') && null == $request->input('ed_fisica') && null == $request->input('religio') &&
-            null == $request->input('valors')){
-            $pdf->SetXY(141.9, 146);
-            $pdf->Write(5,"X");
-        }
-        //FILA 1
-        //Llengua
-        if (null != $request->input('llengua')){
-            $pdf->SetXY(112.9, 156.7);
-            $pdf->Write(5,"X");
-        }
-        //Llengua castellana
-        if (null != $request->input('llengua_castellana')){
-            $pdf->SetXY(112.9, 161.5);
-            $pdf->Write(5,"X");
-        }
-        //Llengua anglesa
-        if (null != $request->input('llengua_inglesa')){
-            $pdf->SetXY(112.9, 166.3);
-            $pdf->Write(5,"X");
-        }
-        //Matemàtiques
-        if (null != $request->input('matematiques')){
-            $pdf->SetXY(112.9, 171);
-            $pdf->Write(5,"X");
-        }
-        //CM Natural
-        if (null != $request->input('cm_natural')){
-            $pdf->SetXY(112.9, 175.8);
-            $pdf->Write(5,"X");
-        }
-        //FILA 2
-        //CM Social
-        if (null != $request->input('cm_social')){
-            $pdf->SetXY(165.9, 156.7);
-            $pdf->Write(5,"X");
-        }
-        //Ed. artística
-        if (null != $request->input('ed_artistica')){
-            $pdf->SetXY(165.9, 161.5);
-            $pdf->Write(5,"X");
-        }
-        //Ed. física
-        if (null != $request->input('ed_fisica')){
-            $pdf->SetXY(165.9, 166.3);
-            $pdf->Write(5,"X");
-        }
-        //Religió
-        if (null != $request->input('religio')){
-            $pdf->SetXY(165.9, 171);
-            $pdf->Write(5,"X");
-        }
-        //Valors
-        if (null != $request->input('valors')){
-            $pdf->SetXY(165.9, 175.8);
-            $pdf->Write(5,"X");
-        }
-        
-        
-        $notes = ["Sempre", "Quasi sempre", "A vegades", "Mai", ""];
-        $coment = ["Assol EXCEL·LENT", "Assol NOTABLE", "Assol SATISFACTORI", "NO ASSOLIMENT", ""];
-        $qualifSelect = ["Els continguts d'aquesta àrea estan adaptats", ""];
-        $comentaris = ["Té dificultats en l'expressió oral", "Té dificultats en l'expressió escrita", "Té dificultats en la comprensió lectora", "Té dificultats a l'hora d'escriure", ""];
-        
-        $i = 1;
-        /* LLENGUA CATALANA */
-        //for ($i=1; $i<10; $i++){
-            $pdf->SetFont('Arial', '', 10);
-            //Actitud 1
-            if ($request->input('actitud_1_' . $i) != 5){
-                $pdf->SetXY(98 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 200);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
-            }
-            //Actitud 2
-            if ($request->input('actitud_2_' . $i) != 5){
-                $pdf->SetXY(137.8 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 200);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
-            }
-            //Actitud 3
-            if ($request->input('actitud_3_' . $i) != 5){
-                $pdf->SetXY(174.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 200);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
-            }
-            //Esforç 1
-            if ($request->input('esforc_1_' . $i) != 5){
-                $pdf->SetXY(98 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 205);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
-            }
-            //Esforç 2
-            if ($request->input('esforc_2_' . $i) != 5){
-                $pdf->SetXY(137.8 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 205);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
-            }
-            //Esforç 3
-            if ($request->input('esforc_3_' . $i) != 5){
-                $pdf->SetXY(174.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 205);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
-            }
-            //Treball 1
-            if ($request->input('treball_1_' . $i) != 5){
-                $pdf->SetXY(98 - strlen($notes[$request->input('treball_1_' . $i)-1]), 209.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
-            }
-            //Treball 2
-            if ($request->input('esforc_2_' . $i) != 5){
-                $pdf->SetXY(137.8 - strlen($notes[$request->input('treball_2_' . $i)-1]), 209.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
-            }
-            //Treball 3
-            if ($request->input('treball_3_' . $i) != 5){
-                $pdf->SetXY(174.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 209.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
-            }
-            //Treball 1
-            if ($request->input('deures_1_' . $i) != 5){
-                $pdf->SetXY(98 - strlen($notes[$request->input('deures_1_' . $i)-1]), 214.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
-            }
-            //Treball 2
-            if ($request->input('deures_2_' . $i) != 5){
-                $pdf->SetXY(137.8 - strlen($notes[$request->input('deures_2_' . $i)-1]), 214.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
-            }
-            //Treball 3
-            if ($request->input('deures_3_' . $i) != 5){
-                $pdf->SetXY(174.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 214.9);
-                $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
-            }
-        //}
-        
-        
-        $pdf->Output('I', 'example.pdf');
-    }
-    
+class Alumnes extends Controller {    
     public function __construct() {
         $this->middleware('auth');
     }
@@ -663,10 +395,1478 @@ class Alumnes extends Controller {
         return view('alumnes.llistat')->with('alumnes', $llistat);
     }
 
+    function exportarForm(Request $request) {
+        $pdf = new Fpdi();
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
 
+        $pdf->setSourceFile(base_path("resources/assets/template.pdf"));
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
 
+        $pdf->SetFont('Arial', 'BI', 10);
+        
+        /* ----PÀGINA 1---- */
+        /* DADES GENERALS */
+        //Data del curs
+        $pdf->SetXY(37 - strlen($request->input('data')), 34.2);
+        $pdf->Write(5, $request->input('data'));
+        
+        //Avaluació
+        $avaluacio = ["Primera avaluació", "Segona avaluació", "Tercera avaluació", ""];
+        $pdf->SetXY(95 - strlen($avaluacio[$request->input('avaluacio')-1]), 34.2);
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $avaluacio[$request->input('avaluacio')-1]));
+        
+        //Nom i cognom
+        $pdf->SetXY(44.2 - strlen($request->input('nom')), 43.62);
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('nom')));
+        
+        //Nivell
+        $pdf->SetXY(30.2 - strlen($request->input('nivell')), 53.1);
+        $pdf->Write(5, $request->input('nivell'));
+        
+        //Classe
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY(50 - strlen($request->input('classe')), 53.1);
+        $pdf->Write(5, $request->input('nivell') . $request->input('classe'));
 
-
+        
+        /* ASPECTES PERSONALS */
+        $pdf->SetFont('Arial', '', 15.5);
+        $x = [133.8, 143.8, 153.8, 163.8, 173.8];
+        
+        //Motivació
+        if ($request->input('motivacio') != 0){
+            $pdf->SetXY($x[$request->input('motivacio')-1], 84.5);
+            $pdf->Write(5,"X");
+        }        
+        //Concentració
+        if ($request->input('concentracio') != 0){
+            $pdf->SetXY($x[$request->input('concentracio')-1], 89.5);
+            $pdf->Write(5,"X");
+        }       
+        //Agenda
+        if ($request->input('agenda') != 0){
+            $pdf->SetXY($x[$request->input('agenda')-1], 94.5);
+            $pdf->Write(5,"X");
+        }   
+        //Relació
+        if ($request->input('relacio') != 0){
+            $pdf->SetXY($x[$request->input('relacio')-1], 99.45);
+            $pdf->Write(5,"X");
+        }   
+        //Participació
+        if ($request->input('participacio') != 0){
+            $pdf->SetXY($x[$request->input('participacio')-1], 104.4);
+            $pdf->Write(5,"X");
+        }   
+        //Relació professor
+        if ($request->input('relacioprofesor') != 0){
+            $pdf->SetXY($x[$request->input('relacioprofesor')-1], 109.35);
+            $pdf->Write(5,"X");
+        }   
+        //Emocions
+        if ($request->input('emocions') != 0){
+            $pdf->SetXY($x[$request->input('emocions')-1], 114.25);
+            $pdf->Write(5,"X");
+        }   
+        //Normes
+        if ($request->input('normes') != 0){
+            $pdf->SetXY($x[$request->input('normes')-1], 119.15);
+            $pdf->Write(5,"X");
+        }   
+        //Comportament
+        if ($request->input('comportament') != 0){
+            $pdf->SetXY($x[$request->input('comportament')-1], 124.05);
+            $pdf->Write(5,"X");
+        }   
+        //Puntualitat
+        if ($request->input('puntualitat') != 0){
+            $pdf->SetXY($x[$request->input('puntualitat')-1], 128.95);
+            $pdf->Write(5,"X");
+        } 
+        
+        
+        /* MESURES D'ATENCIÓ DIVERSITAT */
+        //Cap mesura
+        if(null == $request->input('ed_especial') && null == $request->input('acollida') && null == $request->input('suport_linguistic') &&
+            null == $request->input('sep') && null == $request->input('vetllador') && null == $request->input('ed_especial')){
+            $pdf->SetXY(60, 146);
+            $pdf->Write(5,"X");
+        }
+        //Ed. especial
+        if (null != $request->input('ed_especial')){
+            $pdf->SetXY(69.2, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Acollida
+        if (null != $request->input('acollida')){
+            $pdf->SetXY(69.2, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Suport lingüístic
+        if (null != $request->input('suport_linguistic')){
+            $pdf->SetXY(69.2, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //SEP
+        if (null != $request->input('sep')){
+            $pdf->SetXY(69.2, 171);
+            $pdf->Write(5,"X");
+        }
+        //Vetllador
+        if (null != $request->input('vetllador')){
+            $pdf->SetXY(69.2, 175.8);
+            $pdf->Write(5,"X");
+        }
+        //Ed. especial
+        if (null != $request->input('ed_especial')){
+            $pdf->SetXY(69.2, 180.52);
+            $pdf->Write(5,"X");
+        }
+        
+        /* PLA INDIVUALITZAT */
+        //Cap àrea
+        if(null == $request->input('llengua') && null == $request->input('llengua_castellana') && null == $request->input('llengua_inglesa') &&
+            null == $request->input('matematiques') && null == $request->input('cm_natural') && null == $request->input('cm_social') &&
+            null == $request->input('ed_artistica') && null == $request->input('ed_fisica') && null == $request->input('religio') &&
+            null == $request->input('valors')){
+            $pdf->SetXY(141.9, 146);
+            $pdf->Write(5,"X");
+        }
+        //Llengua
+        if (null != $request->input('llengua')){
+            $pdf->SetXY(112.9, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Llengua castellana
+        if (null != $request->input('llengua_castellana')){
+            $pdf->SetXY(112.9, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Llengua anglesa
+        if (null != $request->input('llengua_inglesa')){
+            $pdf->SetXY(112.9, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //Matemàtiques
+        if (null != $request->input('matematiques')){
+            $pdf->SetXY(112.9, 171);
+            $pdf->Write(5,"X");
+        }
+        //CM Natural
+        if (null != $request->input('cm_natural')){
+            $pdf->SetXY(112.9, 175.8);
+            $pdf->Write(5,"X");
+        }
+        //CM Social
+        if (null != $request->input('cm_social')){
+            $pdf->SetXY(165.9, 156.7);
+            $pdf->Write(5,"X");
+        }
+        //Ed. artística
+        if (null != $request->input('ed_artistica')){
+            $pdf->SetXY(165.9, 161.5);
+            $pdf->Write(5,"X");
+        }
+        //Ed. física
+        if (null != $request->input('ed_fisica')){
+            $pdf->SetXY(165.9, 166.3);
+            $pdf->Write(5,"X");
+        }
+        //Religió
+        if (null != $request->input('religio')){
+            $pdf->SetXY(165.9, 171);
+            $pdf->Write(5,"X");
+        }
+        //Valors
+        if (null != $request->input('valors')){
+            $pdf->SetXY(165.9, 175.8);
+            $pdf->Write(5,"X");
+        }
+        
+        
+        $notes = ["Sempre", "Quasi sempre", "A vegades", "Mai", ""];
+        $qualificacions = ["Assol EXCEL·LENT", "Assol NOTABLE", "Assol SATISFACTORI", "NO ASSOLIMENT", ""];
+        $qualifSelect = ["Els continguts d'aquesta àrea estan adaptats", ""];
+        $comentaris = ["Té dificultats en l'expressió oral", "Té dificultats en l'expressió escrita", "Té dificultats en la comprensió lectora", "Té dificultats a l'hora d'escriure", ""];
+        
+        $i = 1;
+        /* LLENGUA CATALANA */
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 200);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 200);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 200);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 205);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 205);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 205);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('treball_1_' . $i)-1]), 209.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('treball_2_' . $i)-1]), 209.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 209.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('deures_1_' . $i)-1]), 214.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('deures_2_' . $i)-1]), 214.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 214.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(64.9 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 223.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            $pdf->SetXY(97.38 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 221.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));
+        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            $pdf->SetXY(135.95 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 221.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            $pdf->SetXY(173.15 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 221.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 232.4);
+            $pdf->MultiCell(150, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 250.5);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 250.5);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 250.5);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 250.5);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        /* ----FINAL PÀGINA 1---- */
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+        /* ----PÀGINA 2---- */
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
+        $tplIdx = $pdf->importPage(2);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
+            
+        
+        /* LLENGUA CASTELLANA */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 14);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 14);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 14);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 19);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 19);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 19);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('treball_1_' . $i)-1]), 23.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('treball_2_' . $i)-1]), 23.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 23.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('deures_1_' . $i)-1]), 28.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('deures_2_' . $i)-1]), 28.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 28.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(64.9 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 37.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            $pdf->SetXY(97.38 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 35.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));
+        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            $pdf->SetXY(135.95 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 35.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            $pdf->SetXY(173.15 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 35.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 46.2);
+            $pdf->MultiCell(150, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        
+        
+        /* LLENGUA ANGLESA */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('treball_1_' . $i)-1]), 93.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('treball_2_' . $i)-1]), 93.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 93.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(98 - strlen($notes[$request->input('deures_1_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.8 - strlen($notes[$request->input('deures_2_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(174.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(64.9 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 107.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            $pdf->SetXY(97.38 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 105.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));
+        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            $pdf->SetXY(135.95 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 105.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            $pdf->SetXY(173.15 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 105.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 116.5);
+            $pdf->MultiCell(150, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 145);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 145);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 145);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 145);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        
+        
+        /* MATEMÀTIQUES */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 167.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 167.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 167.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 172.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 172.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 172.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 177.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 177.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 177.6);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('deures_1_' . $i)-1]), 182.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('deures_2_' . $i)-1]), 182.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 182.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 191.2);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 189.2);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 189.2);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 189.2);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 189.2);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 189.2);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 189.2);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 200);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 228);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 228);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 228);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 228);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        /* ----FINAL PÀGINA 2---- */
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+        /* ----PÀGINA 3---- */
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
+        $tplIdx = $pdf->importPage(3);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
+            
+        
+        /* CM NATURAL */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('deures_1_' . $i)-1]), 33.7);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('deures_2_' . $i)-1]), 33.7);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 33.7);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 42.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 51.2);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 70);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+   
+        
+        /* CM SOCIAL */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 84);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 89);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 94);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 94);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 94);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('deures_1_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('deures_2_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 98.9);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 107.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 105.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 105.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 105.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 105.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 105.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 105.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 116.6);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 140);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 140);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 140);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 140);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        
+        
+        /* ED ARTÍSTICA */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 163);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 163);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 163);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 168);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 168);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 168);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 173);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 173);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 173);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 186.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 184.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 184.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 184.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 184.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 184.8);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 184.8);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 195.3);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 219);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 219);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 219);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 219);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        /* ----FINAL PÀGINA 3---- */
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+        /* ----PÀGINA 4---- */
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
+        $tplIdx = $pdf->importPage(4);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
+            
+        
+        /* ED FISICA */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 18.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 23.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 28.8);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 42.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 40.5);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 40.5);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 51.2);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 75);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 75);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 75);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 75);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        
+        
+        /* RELIGIÓ */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 101.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 101.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 101.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 106.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 106.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 106.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 111.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 111.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 111.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('deures_1_' . $i)-1]), 116.2);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('deures_2_' . $i)-1]), 116.2);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 116.2);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 125.2);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 123);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 123);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 123);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 123);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 123);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 123);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 133.6);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 162);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 162);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 162);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 162);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        
+        
+        /* ED VALORS */
+        //$i++;
+        $pdf->SetFont('Arial', '', 10);
+        //Actitud 1
+        if ($request->input('actitud_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('actitud_1_' . $i)-1]), 176.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_1_' . $i)-1]));
+        }
+        //Actitud 2
+        if ($request->input('actitud_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('actitud_2_' . $i)-1]), 176.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_2_' . $i)-1]));
+        }
+        //Actitud 3
+        if ($request->input('actitud_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('actitud_3_' . $i)-1]), 176.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('actitud_3_' . $i)-1]));
+        }
+        //Esforç 1
+        if ($request->input('esforc_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('esforc_1_' . $i)-1]), 181.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_1_' . $i)-1]));
+        }
+        //Esforç 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('esforc_2_' . $i)-1]), 181.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_2_' . $i)-1]));
+        }
+        //Esforç 3
+        if ($request->input('esforc_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('esforc_3_' . $i)-1]), 181.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('esforc_3_' . $i)-1]));
+        }
+        //Treball 1
+        if ($request->input('treball_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('treball_1_' . $i)-1]), 186);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_1_' . $i)-1]));
+        }
+        //Treball 2
+        if ($request->input('esforc_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('treball_2_' . $i)-1]), 186);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_2_' . $i)-1]));
+        }
+        //Treball 3
+        if ($request->input('treball_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('treball_3_' . $i)-1]), 186);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('treball_3_' . $i)-1]));
+        }
+        //Deures 1
+        if ($request->input('deures_1_' . $i) != 5){
+            $pdf->SetXY(100.5 - strlen($notes[$request->input('deures_1_' . $i)-1]), 191.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_1_' . $i)-1]));
+        }
+        //Deures 2
+        if ($request->input('deures_2_' . $i) != 5){
+            $pdf->SetXY(137.2 - strlen($notes[$request->input('deures_2_' . $i)-1]), 191.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_2_' . $i)-1]));
+        }
+        //Deures 3
+        if ($request->input('deures_3_' . $i) != 5){
+            $pdf->SetXY(172.8 - strlen($notes[$request->input('deures_3_' . $i)-1]), 191.1);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $notes[$request->input('deures_3_' . $i)-1]));
+        }
+        //Adaptats
+        $pdf->SetFont('Arial', 'I', 8);
+        if ($request->input('adaptats_' . $i) != 2){
+            $pdf->SetXY(67 - strlen($qualifSelect[$request->input('adaptats_' . $i)-1]), 199.95);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualifSelect[$request->input('adaptats_' . $i)-1]));
+        }
+        //Qualificació 1
+        $pdf->SetFont('Arial', 'B', 10);
+        if ($request->input('qualificacio_1_' . $i) != 5){
+            if ($request->input('qualificacio_1_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(101.2 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 197.9);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(100 - strlen($qualificacions[$request->input('qualificacio_1_' . $i)-1]), 197.9);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_1_' . $i)-1]));        }
+        //Qualificació 2
+        if ($request->input('qualificacio_2_' . $i) != 5){
+            if ($request->input('qualificacio_2_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(137.5 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 197.9);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(136.6 - strlen($qualificacions[$request->input('qualificacio_2_' . $i)-1]), 197.9);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_2_' . $i)-1]));
+        }
+        //Qualificació 3
+        if ($request->input('qualificacio_3_' . $i) != 5){
+            if ($request->input('qualificacio_3_' . $i) == 3){
+                $pdf->SetFont('Arial', 'B', 9);
+                $pdf->SetXY(173.2 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 197.9);
+            }else{
+                $pdf->SetFont('Arial', 'B', 10);
+                $pdf->SetXY(171.4 - strlen($qualificacions[$request->input('qualificacio_3_' . $i)-1]), 197.9);
+            }
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $qualificacions[$request->input('qualificacio_3_' . $i)-1]));
+        }
+        //Observacions
+        $pdf->SetFont('Arial', '', 10);
+        if (null != $request->input('observacionsNotes_' . $i)){
+            $pdf->SetXY(43.2, 208.6);
+            $pdf->MultiCell(147, 4, iconv('UTF-8', 'windows-1252', $request->input('observacionsNotes_' . $i)));
+        }
+        //Comentari 1
+        if ($request->input('comentari_1_' . $i) != 5){
+            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 232);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+        }
+        //Comentari 2
+        if ($request->input('comentari_2_' . $i) != 5){
+            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 232);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+        }
+        //Comentari 3
+        if ($request->input('comentari_3_' . $i) != 5){
+            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 232);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+        }
+        //Comentari 4
+        if ($request->input('comentari_4_' . $i) != 5){
+            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 232);
+            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+        }
+        /* ----FINAL PÀGINA 4---- */
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+        /* ----PÀGINA 5---- */
+        $pdf->AddPage('P');
+        $pdf->SetMargins(0, 0, 0, 0);
+        $tplIdx = $pdf->importPage(5);
+        $pdf->useTemplate($tplIdx, 7, 0, $pdf->getTemplateSize($tplIdx)['width'] * .92);
+        
+        $arrayNumFaltes = ["Cap", "Menys de 5", "Entre 5 i 10", "Entre 10 i 20", "Més de 20", "Més de 30", "Ha faltat quasi tot el trimestre"];
+        $arrayNumFaltesJust = [ "Les faltes estan justificades", "Hi ha faltes sense justificar", "No s'han justificat les faltes"];       
+        /* FALTES */
+        //Número faltes
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetXY(93, 17.8);
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $arrayNumFaltes[$request->input('numFaltesJust')-1]));
+        //Faltes justificades
+        if ($request->input($request->input('numFaltesJust')) != 4){
+            $pdf->SetXY(20.8, 23.5);
+            $pdf->Write(5, iconv('UTF-8', 'windows-1252', $arrayNumFaltesJust[$request->input('numFaltesJust')-1]));
+        }
+        //Comentaris faltes
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY(20.8, 30);
+        $pdf->MultiCell(170, 4, iconv('UTF-8', 'windows-1252', $request->input('faltesComentaris')));
+        
+        
+        /* OBSERVACIONS I DATA*/
+        //Observacions
+        $pdf->SetXY(20.8, 55);
+        $pdf->MultiCell(170, 4, iconv('UTF-8', 'windows-1252', $request->input('observacions')));
+        //Dia
+        $pdf->SetXY(33, 122.4);
+        $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('dia')));
+        /* ----FINAL PÀGINA 5---- */
+        
+        $pdf->Output('I', 'example.pdf');
+        $pdf->Close();
+    }
 }
 
 // FINAL DE LA CLASE

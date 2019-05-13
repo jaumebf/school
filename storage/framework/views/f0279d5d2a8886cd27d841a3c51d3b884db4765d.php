@@ -57,7 +57,7 @@
         <br>
         <h1 align='center'>Llista d'alumnes</h1>
 
-        <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th class="th-sm">NOM</th>
@@ -95,21 +95,6 @@
             </ul>
         </div>
     </div>
-
-    
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <script>
-$(document).ready(function () {
-    $('#dtBasicExample').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});
-    </script>
 
 </div>
 <?php $__env->stopSection(); ?>
