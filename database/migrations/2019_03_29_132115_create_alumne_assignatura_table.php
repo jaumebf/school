@@ -33,7 +33,7 @@ class CreateAlumneAssignaturaTable extends Migration
             $table->integer('qualificacio_1')->default(0);
             $table->integer('qualificacio_2')->default(0);
             $table->integer('qualificacio_3')->default(0);
-            $table->string('observacions')->default('');
+            $table->string('observacions', 320)->default('');
             $table->integer('comentari_1')->default(0);
             $table->integer('comentari_2')->default(0);
             $table->integer('comentari_3')->default(0);

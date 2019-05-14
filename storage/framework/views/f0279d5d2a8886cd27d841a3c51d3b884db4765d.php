@@ -18,38 +18,45 @@
     </div>
     
     <div class="col-md-9">
-        <br>
         <form method="POST" action="<?php echo e(url('filtratge/')); ?>">
             <?php echo csrf_field(); ?>
-            <br>
-            <label for="course">Curs</label>
-            <select name="course">
-                <option value=""></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option></option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>          
-            </select>       
-            <br>   
-            <label for="class">Classe</label>
-            <select name="class">
-                <option value=""></option>
-                <option value="A">A</option>
-                <option value="B">B</option>                  
-            </select>       
-            <br>   
-
-            <label for="name">Nom</label>
-            <input type="text" name="name" value="">       
-            <br>
-
-            <label for="surname">Cognom</label>
-            <input type="text" name="surname" value="">       
-            <br>
-
-            <input type="submit" value="Tramet la consulta">
+            <table cellpadding="10" align="center">                
+                <tr align="center">
+                    <td>
+                        <label for="course">Curs</label>
+                        <select class="form-control" name="course">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option></option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>           
+                        </select>  
+                    </td>
+                    <td>
+                        <label for="class">Classe</label>
+                        <select class="form-control" name="class">
+                            <option value=""></option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>                   
+                        </select>   
+                    </td>
+                    <td>
+                        <label for="name">Nom</label>
+                        <input class="form-control" type="text" name="name" value="">  
+                    </td>
+                    <td>
+                        <label for="surname">Cognom</label>
+                        <input class="form-control" type="text" name="surname" value="">     
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="4">
+                        <input type="submit" class="btn btn-primary" value="Buscar">
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 

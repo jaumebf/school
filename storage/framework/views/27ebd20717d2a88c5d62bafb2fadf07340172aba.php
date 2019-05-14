@@ -43,7 +43,7 @@
             <div class="form-group <?php echo e($errors->has('curs') ? 'is-invalid' : ''); ?>" name="curs">
                 <label for="curs" class="col-sm-2 col-form-label col-form-label-sm">Curs</label>               
                 <input type="number" name="curs" value="<?php echo e(old('curs')); ?>" class="form-control">                 
-                <?php if($errors->has('cognom')): ?>                  
+                <?php if($errors->has('curs')): ?>                  
                 <strong><?php echo e($errors->first('curs')); ?></strong>                  
                 <?php endif; ?>    
             </div>

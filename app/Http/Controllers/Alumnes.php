@@ -684,23 +684,23 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 250.5);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+            $pdf->SetXY(22, 250.5);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 250.5);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+            $pdf->SetXY(68, 250.5);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 250.5);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+            $pdf->SetXY(112, 250.5);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 250.5);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+            $pdf->SetXY(155, 250.5);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         /* ----FINAL PÀGINA 1---- */
     /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -712,7 +712,7 @@ class Alumnes extends Controller {
             
         
         /* LLENGUA CASTELLANA */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -804,28 +804,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 70);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+            $pdf->SetXY(22, 70);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 70);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+            $pdf->SetXY(68, 70);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 70);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+            $pdf->SetXY(112, 70);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 70);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+            $pdf->SetXY(155, 70);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         
         
         /* LLENGUA ANGLESA */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -917,28 +917,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(60 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 145);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+            $pdf->SetXY(22, 145);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(105 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 145);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+            $pdf->SetXY(68, 145);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(150 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 145);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+            $pdf->SetXY(112, 145);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(195 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 145);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+            $pdf->SetXY(155, 145);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         
         
         /* MATEMÀTIQUES */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1047,23 +1047,23 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 228);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
+            $pdf->SetXY(22, 228);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 228);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
+            $pdf->SetXY(66, 228);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 228);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
+            $pdf->SetXY(110, 228);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 228);
-            $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
+            $pdf->SetXY(152, 228);
+            $pdf->MultiCell(35, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         /* ----FINAL PÀGINA 2---- */
     /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1075,7 +1075,7 @@ class Alumnes extends Controller {
             
         
         /* CM NATURAL */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1184,28 +1184,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 70);
+            $pdf->SetXY(22, 70);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 70);
+            $pdf->SetXY(66, 70);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 70);
+            $pdf->SetXY(110, 70);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 70);
+            $pdf->SetXY(152, 70);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
    
         
         /* CM SOCIAL */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1314,28 +1314,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 140);
+            $pdf->SetXY(22, 140);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 140);
+            $pdf->SetXY(66, 140);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 140);
+            $pdf->SetXY(110, 140);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 140);
+            $pdf->SetXY(152, 140);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         
         
         /* ED ARTÍSTICA */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1429,22 +1429,22 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 219);
+            $pdf->SetXY(22, 219);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 219);
+            $pdf->SetXY(66, 219);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 219);
+            $pdf->SetXY(110, 219);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 219);
+            $pdf->SetXY(152, 219);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         /* ----FINAL PÀGINA 3---- */
@@ -1457,7 +1457,7 @@ class Alumnes extends Controller {
             
         
         /* ED FISICA */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1551,28 +1551,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 75);
+            $pdf->SetXY(22, 75);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 75);
+            $pdf->SetXY(66, 75);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 75);
+            $pdf->SetXY(110, 75);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 75);
+            $pdf->SetXY(152, 75);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         
         
         /* RELIGIÓ */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1681,28 +1681,28 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 162);
+            $pdf->SetXY(22, 162);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 162);
+            $pdf->SetXY(66, 162);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 162);
+            $pdf->SetXY(110, 162);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 162);
+            $pdf->SetXY(152, 162);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         
         
         /* ED VALORS */
-        //$i++;
+        $i++;
         $pdf->SetFont('Arial', '', 10);
         //Actitud 1
         if ($request->input('actitud_1_' . $i) != 5){
@@ -1811,22 +1811,22 @@ class Alumnes extends Controller {
         }
         //Comentari 1
         if ($request->input('comentari_1_' . $i) != 5){
-            $pdf->SetXY(59 - strlen($comentaris[$request->input('comentari_1_' . $i)-1]), 232);
+            $pdf->SetXY(22, 232);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_1_' . $i)-1]), 0, "C");
         }
         //Comentari 2
         if ($request->input('comentari_2_' . $i) != 5){
-            $pdf->SetXY(104 - strlen($comentaris[$request->input('comentari_2_' . $i)-1]), 232);
+            $pdf->SetXY(66, 232);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_2_' . $i)-1]), 0, "C");
         }
         //Comentari 3
         if ($request->input('comentari_3_' . $i) != 5){
-            $pdf->SetXY(149 - strlen($comentaris[$request->input('comentari_3_' . $i)-1]), 232);
+            $pdf->SetXY(110, 232);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_3_' . $i)-1]), 0, "C");
         }
         //Comentari 4
         if ($request->input('comentari_4_' . $i) != 5){
-            $pdf->SetXY(194 - strlen($comentaris[$request->input('comentari_4_' . $i)-1]), 232);
+            $pdf->SetXY(152, 232);
             $pdf->MultiCell(40, 4, iconv('UTF-8', 'windows-1252', $comentaris[$request->input('comentari_4_' . $i)-1]), 0, "C");
         }
         /* ----FINAL PÀGINA 4---- */
