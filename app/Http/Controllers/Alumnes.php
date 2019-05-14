@@ -230,13 +230,10 @@ class Alumnes extends Controller {
         $observacions = Observacions::findOrFail($id);
         $alumneAssignaturaExist = Alumne_Assignatura::where("alumne_id", $id)->firstOrFail();
 
-        $alumneAssignatura = false;
         if ($alumneAssignaturaExist) {
             $alumneAssignatura = Alumne_Assignatura::where("alumne_id", $id)->get();
-        }
-        $assignatures = Assignatura::all();
-
-        return view('accions.formulari')
+            $assignatures = Assignatura::all();
+            return view('accions.formulari')
                         ->with('asP', $asP)
                         ->with('pla', $pla)
                         ->with('atencio', $atencio)
@@ -244,6 +241,7 @@ class Alumnes extends Controller {
                         ->with('assignatures', $assignatures)
                         ->with('alumne', $alumne)
                         ->with('alumneAssignatura', $alumneAssignatura);
+        }
     }
 
     function modificarForm(Request $request) {
@@ -307,7 +305,7 @@ class Alumnes extends Controller {
         $exist = Alumne_Assignatura::where("alumne_id", $request->id)->first();
         if ($exist) {
             $numAssignatures = count(Assignatura::get());
-            $id_alumne = $exist->alumne_id;
+            $id_alumne = $request->id;
 
             //Numero de assignatura
             $assignatura_id = 1;
@@ -315,7 +313,7 @@ class Alumnes extends Controller {
             for ($i = 0; $i < $numAssignatures; $i++) {
                 //$assignatures = Alumne_Assignatura::findOrFail($request->id);
                 //// $assignatures = Alumne_Assignatura::where("alumne_id",$id_alumne->alumne_id)->get();   
-                $assignatures = Alumne_Assignatura::where('assignatura_id', $assignatura_id)->first();
+                $assignatures = Alumne_Assignatura::where('assignatura_id', $assignatura_id)->where("alumne_id", $request->id)->first();
                 $assignatures->alumne_id = $id_alumne;
                 $assignatures->actitud_1 = ($request->input('actitud_1_' . $assignatura_id)) ? $assignatures->actitud_1 = $request->input('actitud_1_' . $assignatura_id) : $assignatures->actitud_1 = 5;
                 $assignatures->actitud_2 = ($request->input('actitud_2_' . $assignatura_id)) ? $assignatures->actitud_2 = $request->input('actitud_2_' . $assignatura_id) : $assignatures->actitud_2 = 5;
