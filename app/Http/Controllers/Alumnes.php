@@ -92,7 +92,7 @@ class Alumnes extends Controller {
         $request->validate([
             'nom' => 'required|max:100',
             'cognom' => 'required|max:100',
-            'curs' => 'required|numeric|min:1|max:8',
+            'curs' => 'required|numeric|min:1|max:6',
             'classe' => 'required|max:1',
             'dni' => 'required|min:1|max:9',
             'dob' => 'required|date|date_format:Y-m-d',
@@ -1862,7 +1862,7 @@ class Alumnes extends Controller {
         $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('dia')));
         /* ----FINAL PÀGINA 5---- */
         
-        $pdf->Output('I', 'example.pdf');
+        $pdf->Output('I', 'notes '. $request->input('nom') . '.pdf');
         $pdf->Close();
     }
 }

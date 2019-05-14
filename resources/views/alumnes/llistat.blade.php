@@ -67,7 +67,7 @@
 
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
-                <tr>
+                <tr align="center">
                     <th class="th-sm">NOM</th>
                     <th class="th-sm">COGNOM</th>
                     <th class="th-sm">DNI</th>
@@ -79,7 +79,7 @@
             </thead>
             <tbody>
                 @foreach($alumnes as $alumne)
-                <tr>
+                <tr align="center">
                     <td>{{$alumne->name}}</td>
                     <td>{{$alumne->surname}}</td>
                     <td>{{$alumne->dni}}</td>        

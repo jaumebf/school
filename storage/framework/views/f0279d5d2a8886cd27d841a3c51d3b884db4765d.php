@@ -66,7 +66,7 @@
 
         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
-                <tr>
+                <tr align="center">
                     <th class="th-sm">NOM</th>
                     <th class="th-sm">COGNOM</th>
                     <th class="th-sm">DNI</th>
@@ -78,7 +78,7 @@
             </thead>
             <tbody>
                 <?php $__currentLoopData = $alumnes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alumne): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
+                <tr align="center">
                     <td><?php echo e($alumne->name); ?></td>
                     <td><?php echo e($alumne->surname); ?></td>
                     <td><?php echo e($alumne->dni); ?></td>        
