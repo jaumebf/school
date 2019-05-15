@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/xampp/htdocs/school/routes/web.php</file>
             <file>file:/C:/xampp/htdocs/school/app/Http/Controllers/Alumnes.php</file>
-            <file>file:/C:/xampp/htdocs/school/fpdf.php</file>
             <file>file:/C:/xampp/htdocs/school/config/app.php</file>
+            <file>file:/C:/xampp/htdocs/school/resources/views/alumnes/llistat.blade.php</file>
             <file>file:/C:/xampp/htdocs/school/resources/views/accions/formulari.blade.php</file>
         </group>
     </open-files>

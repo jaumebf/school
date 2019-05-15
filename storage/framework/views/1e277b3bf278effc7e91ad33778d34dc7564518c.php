@@ -56,11 +56,6 @@
                                     <?php echo e(__('Login')); ?>
 
                                 </button>
-
-                                <a class="btn btn-link" href="<?php echo e(route('password.request')); ?>">
-                                    <?php echo e(__('Forgot Your Password?')); ?>
-
-                                </a>
                             </div>
                         </div>
                     </form>

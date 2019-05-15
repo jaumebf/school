@@ -416,16 +416,16 @@ class Alumnes extends Controller {
         $pdf->Write(5, iconv('UTF-8', 'windows-1252', $avaluacio[$request->input('avaluacio')-1]));
         
         //Nom i cognom
-        $pdf->SetXY(44.2 - strlen($request->input('nom')), 43.62);
+        $pdf->SetXY(30.2, 43.62);
         $pdf->Write(5, iconv('UTF-8', 'windows-1252', $request->input('nom')));
         
         //Nivell
-        $pdf->SetXY(30.2 - strlen($request->input('nivell')), 53.1);
+        $pdf->SetXY(30.2, 53.1);
         $pdf->Write(5, $request->input('nivell'));
         
         //Classe
         $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(50 - strlen($request->input('classe')), 53.1);
+        $pdf->SetXY(50.2, 53.1);
         $pdf->Write(5, $request->input('nivell') . $request->input('classe'));
 
         
