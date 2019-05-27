@@ -29,8 +29,8 @@ Route::middleware(['isAdmin'])->group(function() {
     Route::get('/usuaris/alta', 'usuarisController@altaUsuari');
     Route::post('/usuaris/alta', 'usuarisController@afegirUsuari');
     Route::post('/usuaris/llistat', 'usuarisController@canviarPassword');
-    Route::get('/usuaris/canviarRol/{codi}', 'usuarisController@canviarRol')->where('codi', '[0-9]+');
-    Route::get('/usuaris/esborrar/{codi}', 'usuarisController@esborrarUsuari')->where('codi', '[0-9]+');    
+    Route::get('/usuaris/canviarRol/{codi}', 'usuarisController@canviarRol')->where('codi', '^(?!1$).*$');
+    Route::get('/usuaris/esborrar/{codi}', 'usuarisController@esborrarUsuari')->where('codi', '^(?!1$).*$'); 
 });
 
 //Alumnes
